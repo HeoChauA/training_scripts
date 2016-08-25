@@ -1,0 +1,6 @@
+{
+    "name": "root/vagrant",
+    "require": {
+        "twig/twig": "^1.24"
+    }
+}
