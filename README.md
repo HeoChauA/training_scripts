@@ -24,5 +24,17 @@ Move into repo folder and run
 `$ vagrant ssh`
 
 #### Playbook
-
+  ```
+  tasks:
+    - name: install apache
+      apt: name=apache2 state=present
+  ```
 #### Composer
+  ```
+  {
+    "name": "root/vagrant",
+    "require": {
+        "twig/twig": "^1.24"
+    }
+  }
+  ```
