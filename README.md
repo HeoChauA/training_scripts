@@ -20,6 +20,7 @@ Clone this repository to your computer and launch a Virtual Box containing a min
 Move into repo folder and run
 
 `$ vagrant up`
+
 `$ vagrant ssh`
 
 #### Playbook
@@ -52,3 +53,5 @@ Run command:
 ```
 $ composer create-project drupal-composer/drupal-project:8.x-dev d8 --stability dev --no-interaction
 ```
+
+Your Drupal code will be in `/d8/web/` and all other dependencies are in `/d8/vendor/`.
