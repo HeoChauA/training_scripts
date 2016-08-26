@@ -11,16 +11,15 @@ When creating projects lead engineers will document all necessary dependencies, 
 ### Prerequisites, Installations
 * VirtualBox: https://www.virtualbox.org/wiki/Downloads
 * Vagrant: https://www.vagrantup.com/downloads.html
-* Ansible: $ sudo apt-get install ansible
+* Ansible: `$ sudo apt-get install ansible`
 
-### Start launching a LAMP stack
-Clone this repository to your computer. 
+### Provision a minimal LAMP stack
+Clone this repository to your computer and launch a Virtual Box containing a minimal stack containing Ubuntu, Apache, MySQL, PHP, Composer. 
 
 #### Vagrant
 Move into repo folder and run
 
 `$ vagrant up`
-
 `$ vagrant ssh`
 
 #### Playbook
@@ -38,3 +37,18 @@ Move into repo folder and run
     }
   }
   ```
+
+### Install Drupal with composer
+
+Manage your Drupal projects and all it's dependencies with composer has great benefits:
+* Keep your projects consistent for all devs
+* Avoid installing conflicting versions 
+* Avoid backwards compatibility issues
+* Only version control custom code (modules, themes). Everything else is managed with composer.json
+
+Checkout this template for a [Composer managed Drupal 8 project:](https://github.com/drupal-composer/drupal-project)
+
+Run command:
+```
+$ composer create-project drupal-composer/drupal-project:8.x-dev d8 --stability dev --no-interaction
+```
