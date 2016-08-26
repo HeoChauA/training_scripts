@@ -1,4 +1,4 @@
-# scripts
+# How-to: Vagrant, Ansible, Composer
 This is a training to standard tools to initialize projects environments, dependencies, configurations. You will create your own (minimal) LAMP stack using Vagrant and Ansible. Then get Drupal 8 running using Composer.
 
 Goal for all FFW VN developers is to understand and follow a consistent method to setup project environments using: 
@@ -38,7 +38,7 @@ Move into repo folder and run
   }
   ```
 
-### Install Drupal with composer
+### Install Drupal 8 with Composer
 
 Manage your Drupal projects and all it's dependencies with composer has great benefits:
 * Keep your projects consistent for all devs
