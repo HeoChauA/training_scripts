@@ -1,5 +1,0 @@
----
-apache:
-    install: '1'
-    docroot: /vagrant/docroot
-    servername: myApp.vb

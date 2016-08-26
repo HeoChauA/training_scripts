@@ -1,17 +1,11 @@
 ---
 - hosts: all
   sudo: true
-  vars_files:
-    - vars/all.yml
   tasks:
     - name: update apt cache
       apt: update_cache=yes
     - name: install apache
       apt: name=apache2 state=present
-    - name: create vhost
-      sudo: yes
-      template: src=apache/vhost1.conf.tpl dest=/etc/apache2/sites-available/000-default.conf
-      service: name=apache2 enabled=yes state=restarted
     - name: install mysql
       apt: name=mysql-server state=present
     - name: install php
