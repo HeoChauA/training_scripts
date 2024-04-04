@@ -1,18 +1,6 @@
-let student = {
-  name: "John",
-  age: 20,
-  gender: "Male",
-  marks: {
-      math: 80,
-      science: 75,
-      english: 90
-  },
-};
-
-let studentInfo = Object.create(student);
-
-studentInfo.getInfo = () => {
-  return;
-}
-
-console.log(student);
+let x:string = "Day la chuoi";
+let y:number = 10;
+let z = true;
+console.log(x);
+console.log(y);
+console.log(z);
