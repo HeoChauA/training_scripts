@@ -1,6 +1,10 @@
-let x:string = "Day la chuoi";
-let y:number = 11;
-let z = true;
-console.log(x);
-console.log(y);
-console.log(z);
+let Ten = prompt ("Hay nhap ten", "Nguyen Van A")
+let Hello;
+if (Ten == null || Ten == "") {
+  Hello = "Chua nhap ten";
+}
+else {
+  Hello = "Xin chao" + Ten;
+}
+
+console.log(Hello);
