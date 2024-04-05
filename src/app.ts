@@ -1,7 +1,11 @@
-let x, y;
-x = prompt('Hay nhap chieu dai');
-y = prompt('Hay nhap chieu rong');
+let doC = prompt('Hay nhap do C');
 
-let S = Number(x) * Number(y)
+let doF;
+if (doC === null || doC === "") {
+    doF = 'Chua nhap do C';
+}
+else{
+    doF = Number(doC) *9/5 +32;
+}
 
-console.log(S);
+console.log(doF)
