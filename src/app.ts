@@ -1,11 +1,18 @@
-let doC = prompt('Hay nhap do C');
+let Ten, Tuoi;
+Ten = prompt('Hay nhap chieu ten');
+Tuoi = prompt('Hay nhap chieu tuoi');
 
-let doF;
-if (doC === null || doC === "") {
-    doF = 'Chua nhap do C';
-}
-else{
-    doF = Number(doC) *9/5 +32;
+let Thongtin;
+if (Ten === null || Ten === '') {
+    Thongtin = 'Chua nhap ten';
 }
 
-console.log(doF)
+else if (Tuoi === null || Tuoi === '') {
+    Thongtin = 'Chua nhap tuoi';
+}
+
+else {
+    Thongtin = 'Xin chao ' + Ten + ", tuoi cua ban la " + Number(Tuoi);
+}
+
+console.log(Thongtin);

@@ -1,10 +1,15 @@
 "use strict";
-let doC = prompt('Hay nhap do C');
-let doF;
-if (doC === null || doC === "") {
-    doF = 'Chua nhap do C';
+let Ten, Tuoi;
+Ten = prompt('Hay nhap chieu ten');
+Tuoi = prompt('Hay nhap chieu tuoi');
+let Thongtin;
+if (Ten === null || Ten === '') {
+    Thongtin = 'Chua nhap ten';
+}
+else if (Tuoi === null || Tuoi === '') {
+    Thongtin = 'Chua nhap tuoi';
 }
 else {
-    doF = Number(doC) * 9 / 5 + 32;
+    Thongtin = 'Xin chao ' + Ten + ", tuoi cua ban la " + Number(Tuoi);
 }
-console.log(doF);
+console.log(Thongtin);
