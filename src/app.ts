@@ -1,10 +1,7 @@
-let Ten = prompt ("Hay nhap ten", "Nguyen Van A")
-let Hello;
-if (Ten == null || Ten == "") {
-  Hello = "Chua nhap ten";
-}
-else {
-  Hello = "Xin chao" + Ten;
-}
+let x, y;
+x = prompt('Hay nhap chieu dai');
+y = prompt('Hay nhap chieu rong');
 
-console.log(Hello);
+let S = Number(x) * Number(y)
+
+console.log(S);
