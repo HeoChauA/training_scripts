@@ -1,13 +1,15 @@
 "use strict";
 let Kiemtra = (x) => {
-    let Du = x % 2;
     let Thongtin;
     if (typeof x === 'number') {
-        if (Du == 0) {
-            Thongtin = 'Day la so chan';
+        if (x > 0) {
+            Thongtin = 'Day la so duong';
+        }
+        else if (x < 0) {
+            Thongtin = 'Day la so am';
         }
         else {
-            Thongtin = 'Day la so le';
+            Thongtin = 'Day la so 0';
         }
     }
     else {
@@ -15,4 +17,4 @@ let Kiemtra = (x) => {
     }
     return Thongtin;
 };
-console.log(Kiemtra(15));
+console.log(Kiemtra(0));
