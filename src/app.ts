@@ -1,3 +1,3 @@
-let x = ['Thanh', 'Huong', 'An', 'Long'];
-x.sort();
-console.log(x);
+let x = [51, 185, 30, 92];
+let sum = x.reduce((total, value) => total + value);
+console.log(sum);
