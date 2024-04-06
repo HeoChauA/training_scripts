@@ -1,3 +1,3 @@
 let x = [51, 185, 30, 92];
-let sum = x.reduce((total, value) => total + value);
-console.log(sum);
+let max = x.reduce((total, value) => Math.max(total, value));
+console.log(max);
