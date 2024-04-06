@@ -1,6 +1,4 @@
 "use strict";
-let x = [81, 39, 7, 100, 14];
-x.sort((a, b) => a - b);
+let x = ['Thanh', 'Huong', 'An', 'Long'];
+x.sort();
 console.log(x);
-let y = x.reverse();
-console.log(y);
