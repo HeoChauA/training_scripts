@@ -1,3 +1,3 @@
-let x = [51, 185, 30, 92];
-let reverse = x.reverse();
-console.log(reverse);
+let x = [51, 185, 92, 51, 30, 185, 30, 92];
+let removedup = [...new Set(x)]
+console.log(removedup);
