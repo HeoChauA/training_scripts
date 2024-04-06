@@ -1,20 +1,8 @@
-let Kiemtra = (x:number) => {
-    let Thongtin:string;
-    if (typeof x === 'number') {
-        if (x > 0) {
-            Thongtin = 'Day la so duong';
-        }
-        else if (x < 0) {
-            Thongtin = 'Day la so am';
-        }
-        else {
-            Thongtin = 'Day la so 0';
-        }
-    }
-    else {
-        Thongtin = 'Day khong phai la so';
-    }
-    return Thongtin;
-}
+let x = [81, 39, 7, 100, 14];
+x.sort((a:number, b:number) => a - b);
 
-console.log(Kiemtra(0))
+console.log(x);
+
+let y = x.reverse();
+
+console.log(y);
