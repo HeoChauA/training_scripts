@@ -1,16 +1,30 @@
-let kiemtra = ([...dayso]) => {
-    if (dayso.length < 2) {
-        return false;
+let student = {
+    name: "John",
+    age: 20,
+    gender: "Male",
+    marks: {
+        math: 80,
+        science: 75,
+        english: 90
+    },
+};
+
+const getInfo = student.name + ' is ' + student.age + ' years old, studying in ' + student.gender + ' gender.';
+
+const calculateAverage = (student.marks.math + student.marks.science + student.marks.english) / Object.keys(student.marks).length;
+
+let kiemtra = ({...student}) => {
+    let mess:string;
+    if ('id' in student) {
+        mess = 'Co ton tai thong tin nay';
     }
-    const diff = dayso[1] - dayso[0];
-    for (let i = 1; i < dayso.length; i++) {
-        if (dayso[i] !== dayso[i - 1] + diff) {
-            return false;
-        }
+    else {
+        mess = 'Khong ton tai thong tin nay';
     }
 
-    return true;
+    return mess;
 }
-const dayso = [51, 185, 30, 92];
 
-console.log(kiemtra([...dayso]));
+console.log(getInfo);
+console.log(calculateAverage);
+console.log(kiemtra({...student}));
