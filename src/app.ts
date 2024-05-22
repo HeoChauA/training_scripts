@@ -64,7 +64,7 @@ console.log(Danhgia(9));
 
 // Phan C - Bai 4
 let Check_2 = (C4:number) => {
-    let Du = C4 % 2;
+    let Du = C4 % 4;
     let Songuyen = Number.isInteger(C4);
     let mess:string;
     if (typeof C4 === 'number' && Songuyen === true) {
@@ -101,22 +101,20 @@ interface Thongtin_Type{
     name:string;
     age:number;
     address:string;
-    Ten:any;
 }
 
 const Thongtin:Thongtin_Type = {
     name: 'Dang Duc Hoan Thien',
     age: 23,
     address: 'Ha Noi',
-    Ten:'',
 };
 
-Thongtin.Ten = () => {
+let info = () => {
     const Ten = Thongtin?.name || 'Unknown';
     return Ten;
 }
 
-console.log(Thongtin.Ten());
+console.log(info());
 
 // Phan C - Bai 7
 let In = (name:string, age:number) => {
@@ -130,7 +128,7 @@ console.log(In('da',45));
 // Phan C - Bai 8
 let arr = [54, 'da', 15.54, 487, 'agg'];
 let Trave = (n:number) => {
-    let Check = arr[n] ?? 'Unknown';
+    const Check = arr[n] ?? 'Unknown';
     return Check;
 }
 console.log(Trave(2));
@@ -154,10 +152,17 @@ console.log(D2(6));
 // Phan D - Bai 3
 let D3 = (b:number) => {
     for (let i = 1; i <= 10; i++) {
-        console.log(b*i);
+        let ketqua = b*i;
+        let pheptinh:string = `${b} * ${i} = ${ketqua}`
+        if (pheptinh) {
+            console.log(pheptinh);
+        }
+        else {
+            return 'khong co ket qua'
+        }
     }
 }
-console.log(D3(5));
+D3(5);
 
 // Phan D - Bai 4
 let D4 = (c:number) => {
@@ -228,11 +233,18 @@ console.log(D11(6));
 let D12 = (n:number) => {
     let i = 1;
     while (i <= 10) {
-        console.log(n*i);
+        let ketqua = n*i
+        let pheptinh:string = `${n} * ${i} = ${ketqua}`
+        if (pheptinh) {
+            console.log(pheptinh);
+        }
+        else {
+            return 'khong co ket qua'
+        }
         i++;
     }
 }
-console.log(D12(6));
+D12(6);
 
 // Phan D - Bai 13
 let D13 = (n:number) => {
@@ -272,12 +284,19 @@ console.log(D15(7))
 let D16 = (n:number) => {
     let i = 1;
     do {
-        console.log(n*i);
+        let ketqua = n*i
+        let pheptinh:string = `${n} * ${i} = ${ketqua}`
+        if (pheptinh) {
+            console.log(pheptinh);
+        }
+        else {
+            return 'khong co ket qua'
+        }
         i++;
     }
     while (i <= 10);
 }
-console.log(D16(9));
+D16(9);
 
 // Phan D - Bai 17
 let D17 = (n:number) => {
@@ -315,11 +334,11 @@ let songuyento = (num:number) => {
     return true;
 }
 
-let sum = (n:number, callback:Function) => {
+let sum = (n:number) => {
     let sum = 0;
     let so = 1;
     do {
-        if (callback(so)) {
+        if (songuyento(so)) {
             sum += so;
         }
         so++;
@@ -328,4 +347,4 @@ let sum = (n:number, callback:Function) => {
 }
 const n = Number(prompt("Nhập n"),);
 
-console.log(sum(n, songuyento));
+console.log(sum(n));
