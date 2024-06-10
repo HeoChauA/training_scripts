@@ -167,12 +167,238 @@ const people = [
 let printToScreen3 = people.forEach((value) => console.log(`${value.name} co so tuoi la ${value.age}`));
 
 //Bai 3.7
-const user = [['name', 'Alice'], ['age', 25], ['city', 'Los Angeles']];
+const user1 = [['name', 'Alice'], ['age', 25], ['city', 'Los Angeles']];
 
 const infomation = new Map();
 
-user.forEach(([key, value]) => {
+user1.forEach(([key, value]) => {
     infomation.set(key, value);
 })
 
 console.log(infomation);
+
+//Bai 4.1
+const complexUser = {
+    id: 101,
+    info: {
+        firstName: 'Alice',
+        address: {
+            city: 'Wonderland',
+            zip: '12345',
+            coordinates: {
+                lat: 52.52,
+                long: 13.405
+            }
+        },
+        contacts: [
+            { type: 'email', value: 'alice@example.com' },
+            { type: 'phone', value: '123-456-7890' }
+        ]
+    },
+    preferences: {
+        theme: 'dark',
+        language: 'English'
+    }
+};
+
+let {id, info: {firstName, address: {city, zip, coordinates: {lat, long}}, contacts:[email, phone]}, preferences: {theme = `light`, language}} = complexUser;
+
+console.log(id, firstName, city, zip, lat, long, email, phone, theme, language);
+
+//Bai 4.2
+const complexArray:any = [1, [2, 3, [4, 5]], 6, [7, [8, 9]]];
+
+let [a, [, b, [, c]], d, [, [e, f]]] = complexArray
+
+console.log(a, b, c, d, e, f);
+
+//Bai 4.3
+let getUserData = function(this:any, a:string, b:string, c:string, d:string) {
+    return {
+        username: a,
+        email: b,
+        settings: {
+            theme: c,
+            notifications: d,
+        },
+    }
+};
+
+const user_2 = getUserData('hahah', 'mail', 'sadas', 'dasdas')
+
+let {username: user, email: mail, settings:{theme: userTheme, notifications: userNotifications} = {}} = user_2
+
+console.log(user, mail, userTheme, userNotifications);
+
+//Bai 4.4
+let arr = [
+    {id:111, name:'snacks', price: 1000},
+    {id:222, name:'cola', price: 2000},
+    {id:333, name:'cookies', price: 1500},
+]
+
+let displayProducts = () => {
+    arr.forEach(({id, name, price}) => {
+        console.log(`Product ${id}: ${name} costs ${price}`);
+    });
+}
+
+displayProducts();
+
+//Bai 4.5
+function fetchData(status = 'success') {
+    return {
+        data: {
+            user: { name: 'Alice', email: 'alice@example.com' },
+            posts: [{ id: 1, title: 'Hello World' }, { id: 2, title: 'Learning JavaScript' }]
+        },
+        status: status,
+    };
+};
+
+const result = fetchData();
+
+let userName, userEmail, firstPostTitle, fecthStatus;
+
+if (result.status === 'success') {
+    userName = result.data.user.name;
+    userEmail = result.data.user.email;
+    firstPostTitle = result.data.posts.length > 1 ? result.data.posts[0].title : 'No Title';
+    fecthStatus = result.status;
+}
+
+console.log(userName, userEmail, firstPostTitle, fecthStatus);
+
+//Bai 5.1
+let convertToJSON = (a:object) => {
+    return JSON.stringify(a);
+}
+let jsonString = convertToJSON(complexUser)
+
+console.log(jsonString);
+
+let parseFromJSON = (a:string) => {
+    return JSON.parse(a);
+}
+
+console.log(parseFromJSON(jsonString));
+
+//Bai 5.2
+const productsJSON = `[
+    { "id": 1, "name": "Laptop", "price": 1500 },
+    { "id": 2, "name": "Mouse", "price": 20 },
+    { "id": 3, "name": "Keyboard", "price": 50 },
+    { "id": 4, "name": "Monitor", "price": 200 }
+]`;
+
+let parse = JSON.parse(productsJSON);
+
+let sort = new Array()
+
+parse.forEach((value:any) => {
+    delete value.id;
+    if (value.price > 100) return sort.push(value);
+});
+
+console.log(sort);
+
+//Bai 5.3
+const userJSON = '{"id": 1, "name": "Alice"}';
+const addressJSON = '{"city": "Wonderland", "zip": "12345"}';
+const preferencesJSON = '{"theme": "dark", "language": "English"}';
+
+const userParse = JSON.parse(userJSON);
+const addressParse = JSON.parse(addressJSON);
+const preferencesParse = JSON.parse(preferencesJSON);
+
+const merge = Object.assign({}, userParse, addressParse, preferencesParse);
+
+console.log(merge);
+
+//Bai 5.4
+const settings = { theme: 'dark', language: 'English' };
+
+let storeData = (a:object, b:string) => {
+    return localStorage.setItem(b, JSON.stringify(a));
+}
+
+storeData(settings, 'setting');
+
+let retrieveData = (a:string) => {
+    return JSON.parse(localStorage.getItem(a) || '{}');
+}
+
+console.log(retrieveData('setting'));
+
+//Bai 5.5
+function fetchUserData() {
+    // Giả lập một API trả về JSON
+    return '{"id": 101, "name": "Alice", "email": "alice@example.com", "age": 25}';
+}
+fetchUserData();
+let parseObj = JSON.parse(fetchUserData());
+let {id: id2, name: name2, email: email2,} = parseObj
+
+console.log(`${name2} co so id la ${id2} voi dia chi email ${email2}`);
+
+//Bai 6.1
+const numbers = [1, 2, 3, 4, 5];
+
+let sumNum = numbers.reduce((total, value) => total + value);
+console.log(sumNum);
+
+//Bai 6.2
+let multiNum = numbers.reduce((total, value) => total * value);
+console.log(multiNum);
+
+//Bai 6.3
+let squaredNumbers:any = [];
+let square = numbers.reduce((total,value) => squaredNumbers.push(value*value), 0);
+
+console.log(squaredNumbers);
+
+//Bai 6.4
+const orders = [
+    { product: 'Laptop', price: 1000 },
+    { product: 'Phone', price: 500 },
+    { product: 'Tablet', price: 300 }
+];
+
+let sumPrice = orders.reduce((total, value) => total + value.price, 0);
+
+console.log(sumPrice);
+
+//Bai 6.5
+let count = numbers.length;
+let mean = sumNum/count;
+
+let stats:any = {};
+stats.sum = sumNum;
+stats.count = count;
+stats.mean = mean;
+
+console.log(stats);
+
+//Bai 6.6
+const words = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple'];
+
+let wordCount = words.reduce((total:any, value) => {
+    total[value] = total[value] + 1 || 1;
+    return total;
+}, {})
+
+console.log(wordCount);
+
+//Bai 6.7
+const people_2 = [
+    { name: 'John', age: 30 },
+    { name: 'Alice', age: 25 },
+    { name: 'Bob', age: 35 },
+    { name: 'Jane', age: 25 }
+];
+
+let groupedByAge = people_2.reduce((total, value) => {
+    return {...total,[value.age]: [value]}
+}, {})
+
+console.log(groupedByAge);
