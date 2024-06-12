@@ -1,297 +1,169 @@
 "use strict";
-//Bai 1.1
-const numarr = [1, 3, 5, 3, -1, 8, 7, 9, 6, -3, 2, 4, 1, 9, 3];
-let max = Math.max(...numarr);
-console.log(max);
-//Bai 1.2
-let sum = numarr.reduce((total, value) => total + value);
-console.log(sum);
-//Bai 1.3
-let reverse = numarr.reverse();
-console.log(reverse);
-//Bai 1.4
-let evenNumber = numarr.filter((value) => value % 2 === 0);
-console.log(evenNumber);
-//Bai 1.5
-let oddNumber = numarr.filter((value) => value % 2 === 1 || value % 2 === -1);
-console.log(oddNumber);
-//Bai 1.6
-let duplicate = numarr.filter((value, index) => numarr.indexOf(value) != index);
-//fillter tra ve mang moi voi nhung gia tri thoa man dieu kien
-//indexOf tra ve gia tri la vi tri cua value xuat hien dau tien
-//dieu kien la vi tri cua value hien tai khac voi vi tri cua value xuat hien dau tien
-console.log(duplicate);
-//Bai 1.7
-let ascending = numarr.sort((a, b) => a - b);
-console.log(ascending);
-//Bai 1.8
-let descending = numarr.sort((a, b) => b - a);
-console.log(descending);
-//Bai 1.9
-let counts = {};
-numarr.map((value) => {
-    counts[value] = counts[value] + 1 || 1; //Neu da co gia tri thi value se + 1,con khong thi value se la 1
-});
-let mostFrequent = Object.keys(counts).reduce((a, b) => (counts[a] > counts[b] ? a : b)); //Neu value cua key a > value cua key b thi tra ve key a, khong thi tra ve key b
-console.log(counts);
-//Bai 1.10
-let double = numarr.map((value) => value * 2);
-console.log(double);
-//Bai 1.11
-let sumOdd = oddNumber.reduce((total, value) => total + value);
-console.log(sumOdd);
-//Bai 1.12
-let sumEven = evenNumber.reduce((total, value) => total + value);
-console.log(sumEven);
-//Bai 1.13
-let biggerThan7 = numarr.find((value) => value > 7);
-console.log(biggerThan7);
-//Bai 1.14
-let test = numarr.some((value) => value < 0);
-console.log(test);
-//Bai 2.1
-const person = new Map();
-person.set('name', 'John').set('age', 30).set('city', 'New York');
-console.log(person);
-let info = (key) => {
-    return person.get(key);
+//Bai 5.1
+let sum = (a, b) => {
+    if (typeof a !== `number` || typeof b !== `number`) {
+        return console.log(`Day khong phai so`);
+    }
+    return console.log(a + b);
 };
-console.log(info(`name`));
-console.log(info(`age`));
-console.log(info(`city`));
-//Bai 2.2
-let check = (key) => {
-    return person.has(key);
-};
-console.log(check(`country`));
-//Bai 2.3
-let checkValue = (value) => {
-    for (let [k, v] of person) {
-        if (v === value) {
+sum(6, 55);
+//Bai 5.2
+let isEven = (a) => {
+    if (typeof a === `number`) {
+        if ((a % 2) === 0) {
             return true;
         }
+        else {
+            return false;
+        }
     }
-    return false;
+    return 'Day khong phai so';
 };
-console.log(checkValue(30));
-//Bai 2.4
-let delKey = (key) => {
-    return person.delete(key);
-};
-delKey(`name`);
-console.log(person);
-//Bai 2.5
-let delValue = (value) => {
-    for (let [k, v] of person) {
-        if (v === value)
-            return person.delete(k);
-    }
-};
-delValue(30);
-console.log(person);
-//Bai 2.6
-let mapSize = () => {
-    return person.size;
-};
-console.log(mapSize());
-//Bai 3.1
-let printToScreen = numarr.forEach((value) => console.log(value));
-printToScreen;
-//Bai 3.2
-let sumArr = 0;
-numarr.forEach((value) => sumArr += value);
-console.log(sumArr);
-//Bai 3.3
-let multiDouble = numarr.forEach((value) => console.log(value * 2));
-//Bai 3.4
-let strarr = ['Trung', 'Hieu', 'Hai', 'Hau', 'Giang'];
-let printToScreen2 = strarr.forEach((value, index) => console.log(`voi chi so la ${index} thi phan tu cua mang la ${value}`));
-//Bai 3.5
-let lenghtOfValue = strarr.forEach((value, index) => console.log(`phan tu ${value} co do dai la ${strarr[index].length}`));
-//Bai 3.6
-const people = [
-    { name: 'John', age: 30 },
-    { name: 'Jane', age: 25 },
-    { name: 'Jim', age: 35 }
-];
-let printToScreen3 = people.forEach((value) => console.log(`${value.name} co so tuoi la ${value.age}`));
-//Bai 3.7
-const user1 = [['name', 'Alice'], ['age', 25], ['city', 'Los Angeles']];
-const infomation = new Map();
-user1.forEach(([key, value]) => {
-    infomation.set(key, value);
-});
-console.log(infomation);
-//Bai 4.1
-const complexUser = {
-    id: 101,
-    info: {
-        firstName: 'Alice',
-        address: {
-            city: 'Wonderland',
-            zip: '12345',
-            coordinates: {
-                lat: 52.52,
-                long: 13.405
-            }
-        },
-        contacts: [
-            { type: 'email', value: 'alice@example.com' },
-            { type: 'phone', value: '123-456-7890' }
-        ]
-    },
-    preferences: {
-        theme: 'dark',
-        language: 'English'
-    }
-};
-let { id, info: { firstName, address: { city, zip, coordinates: { lat, long } }, contacts: [email, phone] }, preferences: { theme = `light`, language } } = complexUser;
-console.log(id, firstName, city, zip, lat, long, email, phone, theme, language);
-//Bai 4.2
-const complexArray = [1, [2, 3, [4, 5]], 6, [7, [8, 9]]];
-let [a, [, b, [, c]], d, [, [e, f]]] = complexArray;
-console.log(a, b, c, d, e, f);
-//Bai 4.3
-let getUserData = function (a, b, c, d) {
-    return {
-        username: a,
-        email: b,
-        settings: {
-            theme: c,
-            notifications: d,
-        },
-    };
-};
-const user_2 = getUserData('hahah', 'mail', 'sadas', 'dasdas');
-let { username: user, email: mail, settings: { theme: userTheme, notifications: userNotifications } = {} } = user_2;
-console.log(user, mail, userTheme, userNotifications);
-//Bai 4.4
-let arr = [
-    { id: 111, name: 'snacks', price: 1000 },
-    { id: 222, name: 'cola', price: 2000 },
-    { id: 333, name: 'cookies', price: 1500 },
-];
-let displayProducts = () => {
-    arr.forEach(({ id, name, price }) => {
-        console.log(`Product ${id}: ${name} costs ${price}`);
-    });
-};
-displayProducts();
-//Bai 4.5
-function fetchData(status = 'success') {
-    return {
-        data: {
-            user: { name: 'Alice', email: 'alice@example.com' },
-            posts: [{ id: 1, title: 'Hello World' }, { id: 2, title: 'Learning JavaScript' }]
-        },
-        status: status,
-    };
-}
-;
-const result = fetchData();
-let userName, userEmail, firstPostTitle, fecthStatus;
-if (result.status === 'success') {
-    userName = result.data.user.name;
-    userEmail = result.data.user.email;
-    firstPostTitle = result.data.posts.length > 1 ? result.data.posts[0].title : 'No Title';
-    fecthStatus = result.status;
-}
-console.log(userName, userEmail, firstPostTitle, fecthStatus);
-//Bai 5.1
-let convertToJSON = (a) => {
-    return JSON.stringify(a);
-};
-let jsonString = convertToJSON(complexUser);
-console.log(jsonString);
-let parseFromJSON = (a) => {
-    return JSON.parse(a);
-};
-console.log(parseFromJSON(jsonString));
-//Bai 5.2
-const productsJSON = `[
-    { "id": 1, "name": "Laptop", "price": 1500 },
-    { "id": 2, "name": "Mouse", "price": 20 },
-    { "id": 3, "name": "Keyboard", "price": 50 },
-    { "id": 4, "name": "Monitor", "price": 200 }
-]`;
-let parse = JSON.parse(productsJSON);
-let sort = new Array();
-parse.forEach((value) => {
-    delete value.id;
-    if (value.price > 100)
-        return sort.push(value);
-});
-console.log(sort);
+console.log(isEven(572));
 //Bai 5.3
-const userJSON = '{"id": 1, "name": "Alice"}';
-const addressJSON = '{"city": "Wonderland", "zip": "12345"}';
-const preferencesJSON = '{"theme": "dark", "language": "English"}';
-const userParse = JSON.parse(userJSON);
-const addressParse = JSON.parse(addressJSON);
-const preferencesParse = JSON.parse(preferencesJSON);
-const merge = Object.assign({}, userParse, addressParse, preferencesParse);
-console.log(merge);
+let factorial = (a) => {
+    let factorial = 1;
+    if (typeof a === `number`) {
+        if (Number.isInteger(a) === true) {
+            if (a > 0) {
+                for (let i = 1; i <= a; i++) {
+                    factorial *= i;
+                }
+                return factorial;
+            }
+            else
+                return `Day khong phai so duong`;
+        }
+        else {
+            return `Day khong phai so nguyen`;
+        }
+    }
+    return `Day khong phai so`;
+};
+console.log(factorial(7));
 //Bai 5.4
-const settings = { theme: 'dark', language: 'English' };
-let storeData = (a, b) => {
-    return localStorage.setItem(b, JSON.stringify(a));
+let isPrime = (a) => {
+    if (typeof a === `number`) {
+        if (a < 2)
+            return false; //0 va 1 khong phai so nguyen to
+        for (let i = 2; i < a; i++) { //lap tu 2 toi a
+            if (a % i === 0) {
+                return false; //neu ton tai a chia i ma khong co so du thi a khong phai so nguyen to
+            }
+        }
+        return true;
+    }
+    return `Day khong phai so`;
 };
-storeData(settings, 'setting');
-let retrieveData = (a) => {
-    return JSON.parse(localStorage.getItem(a) || '{}');
-};
-console.log(retrieveData('setting'));
+console.log(isPrime(7));
 //Bai 5.5
-function fetchUserData() {
-    // Giả lập một API trả về JSON
-    return '{"id": 101, "name": "Alice", "email": "alice@example.com", "age": 25}';
-}
-fetchUserData();
-let parseObj = JSON.parse(fetchUserData());
-let { id: id2, name: name2, email: email2, } = parseObj;
-console.log(`${name2} co so id la ${id2} voi dia chi email ${email2}`);
-//Bai 6.1
-const numbers = [1, 2, 3, 4, 5];
-let sumNum = numbers.reduce((total, value) => total + value);
-console.log(sumNum);
-//Bai 6.2
-let multiNum = numbers.reduce((total, value) => total * value);
-console.log(multiNum);
-//Bai 6.3
-let squaredNumbers = [];
-let square = numbers.reduce((total, value) => squaredNumbers.push(value * value), 0);
-console.log(squaredNumbers);
-//Bai 6.4
-const orders = [
-    { product: 'Laptop', price: 1000 },
-    { product: 'Phone', price: 500 },
-    { product: 'Tablet', price: 300 }
-];
-let sumPrice = orders.reduce((total, value) => total + value.price, 0);
-console.log(sumPrice);
-//Bai 6.5
-let count = numbers.length;
-let mean = sumNum / count;
-let stats = {};
-stats.sum = sumNum;
-stats.count = count;
-stats.mean = mean;
-console.log(stats);
-//Bai 6.6
-const words = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple'];
-let wordCount = words.reduce((total, value) => {
-    total[value] = total[value] + 1 || 1;
-    return total;
-}, {});
-console.log(wordCount);
-//Bai 6.7
-const people_2 = [
-    { name: 'John', age: 30 },
-    { name: 'Alice', age: 25 },
-    { name: 'Bob', age: 35 },
-    { name: 'Jane', age: 25 }
-];
-let groupedByAge = people_2.reduce((total, value) => {
-    return Object.assign(Object.assign({}, total), { [value.age]: [value] });
-}, {});
-console.log(groupedByAge);
+let fibonacci = (n) => {
+    let fibonacci = 0;
+    let a = 1;
+    let b = 0;
+    if (typeof n === `number`) {
+        if (Number.isInteger(n) === true) {
+            if (n <= 1)
+                return n; //Vi tri so 0 va 1 cua day fibonanci la 0 va 1
+            for (let i = 2; i <= n; i++) { //Lap tu 2 den n
+                fibonacci = a + b; //Ket qua = so sau + so truoc
+                b = a; //Trong moi lan lap thi so truoc = so sau cua lan lap truoc
+                a = fibonacci; //Trong moi lan lap thi so sau = ket qua cua lan lap truoc
+            }
+            return fibonacci;
+        }
+        else {
+            return `Day khong phai so nguyen`;
+        }
+    }
+    return `Day khong phai so`;
+};
+console.log(fibonacci(8));
+//Bai 5.6
+let reverseString = (a) => {
+    //split de tach cac ky tu cua string va tra ve mang chua cac substring
+    //reverse de dao nguoc thu tu cac substring trong mang
+    //join de tap hop cac substring trong mang thanh 1 string
+    return a.split(``).reverse().join(``);
+};
+console.log(reverseString(`Hello`));
+//Bai 5.7
+let findMax = (a) => {
+    return a.reduce((total, value) => Math.max(total, value));
+};
+console.log(findMax([45, 89, 165, 94, 73]));
+//Bai 5.8
+let isPalindrome = (a) => {
+    if (typeof a === `string`) {
+        let lowerCase = a.toLowerCase(); //chuyen string thanh string in thuong
+        if (lowerCase === reverseString(lowerCase)) { //so sanh string giua xuoi va nguoc 
+            return true;
+        }
+        return false;
+    }
+    return 'Day khong phai chuoi';
+};
+console.log(isPalindrome(`abccba`));
+//Bai 5.9
+let sumOddNumbers = (a) => {
+    let sum = 0;
+    a.forEach((value) => {
+        if (value % 2 !== 0) {
+            sum += value;
+        }
+    });
+    return sum;
+};
+console.log(sumOddNumbers([1, 2, 3, 4, 5]));
+//Bai 5.10
+let countCharacter = (a, b) => {
+    let count = 0;
+    for (let i = 0; i < a.length; i++) {
+        if (a[i] === b) {
+            count++;
+        }
+    }
+    return count;
+};
+console.log(countCharacter(`abbaccabbca`, `b`));
+//Bai 5.11
+let findMin = (a) => {
+    return a.reduce((total, value) => Math.min(total, value));
+};
+console.log(findMin([45, 89, 165, 94, 73]));
+//Bai 5.12
+let sortArray = (a) => {
+    return a.sort((a, b) => a - b);
+};
+console.log(sortArray([45, 89, 165, 94, 73]));
+//Bai 5.13
+let sumDigits = (a) => {
+    let sum = 0;
+    let ones;
+    if (a === 0)
+        return sum;
+    for (; a > 0;) { //Voi so duong
+        ones = a % 10; //Lay chu so hang don vi cua so
+        sum += ones; //Cong chu so hang don vi vao tong
+        a = Math.floor(a / 10); //Loai bo chu so da lay bang cach chia cho 10 roi lam tron xuong
+    }
+    for (; a < 0;) { //Voi so am
+        ones = a % 10; //Lay chu so hang don vi cua so
+        sum += ones; //Cong chu so hang don vi vao tong
+        a = Math.ceil(a / 10); //Loai bo chu so da lay bang cach chia cho 10 roi lam tron len
+    }
+    return sum;
+};
+console.log(sumDigits(1564));
+console.log(sumDigits(-445));
+//Bai 5.14
+let sum2DArray = (a) => {
+    let sum = 0;
+    for (let i = 0; i < a.length; i++) {
+        for (let j = 0; j < a[i].length; j++) {
+            sum += a[i][j];
+        }
+    }
+    return sum;
+};
+console.log(sum2DArray([[1, 2, 3], [3, 4, 5], [5, 6, 7]]));
