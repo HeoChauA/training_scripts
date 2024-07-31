@@ -307,3 +307,14 @@ let prints = () => {
     }, 2000);
 };
 prints();
+//Bai C4
+let blink = () => {
+    let blinkDiv = document.getElementById("blink");
+    if (!blinkDiv) {
+        console.log(`Khong tim thay phan tu div co id blink`);
+        return;
+    }
+    blinkDiv.style.display = (blinkDiv.style.display == `none` ? `block` : `none`);
+    setTimeout(blink, 1000);
+};
+setTimeout(blink, 1000);
