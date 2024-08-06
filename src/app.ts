@@ -1,69 +1,215 @@
-//Bai 6.1
-const obj1 = {};
-
-Object.defineProperty(obj1, `fixedValue`, {
-    value: `Thien`,
-    enumerable: true,
-    configurable: true,
-});
-console.log(obj1.fixedValue);
-
-
-//Bai 6.2
-const obj2 = {};
-
-Object.defineProperty(obj2, `hiddenValue`, {
-    value: `news`,
-    writable: true,
-    configurable: true,
-});
-
-console.log(obj2.hiddenValue);
-
-//Bai 6.3
-const obj3 = {};
-
-Object.defineProperty(obj3, `permanentValue`, {
-    value: `3.14`,
-    writable: true,
-    enumerable: true,
-});
-
-console.log(obj3.permanentValue);
-
-//Bai 6.4
-const temperature = {
-    _celsius: 0,
-    get celsius() {
-        return this._celsius;
-    },
-    set celsius(value) {
-        this._celsius = value;
-    },
-    get fahrenheit() {
-        return (this.celsius*9/5) + 32;
-    },
-    set fahrenheit(value) {
-        this._celsius = (value - 32)*5/9;
-    },
+//Bai 7.1
+const Person:any = function(this:any, name:string, age:number) {
+    this.name = name;
+    this.age = age;
 };
 
-temperature.celsius = 32;
-console.log(temperature.fahrenheit);
-temperature.fahrenheit = 42;
-console.log(temperature.celsius);
+Person.prototype.introduce = function() {
+    console.log(`Hi, my name is ${this.name} and I am ${this.age} years old.`);
+};
 
-//Bai 6.5
-const item = {
-    _price: 0,
-    get price() {
-        return this._price;
-    },
-    set price(value) {
-        console.log(`_price duoc thay doi gia tri tu ${this._price} toi ${value}`);
-        this._price = value;
+Person.prototype.greet = function() {
+    console.log(`Hello, ${this.name} here!`);
+};
+
+const person1 = new Person('Thien', 24);
+
+person1.introduce();
+person1.greet();
+
+// Bai 7.2
+const Car:any = function(this: any, branch:string) {
+    this.branch = branch;
+};
+
+Car.prototype.drive = function() {
+    console.log(`The ${this.branch} car is driving.`);
+};
+
+const car1 = new Car(`BMW`);
+car1.drive();
+
+console.log(car1.hasOwnProperty(`drive`));
+
+// Bai 7.3
+const Employee:any = function(this:any, name:string, position:string, salary:number) {
+    this.name = name;
+    this.position = position;
+    this.salary = salary;
+};
+
+Employee.prototype.introduce = function() {
+    console.log(`Hi, my name is ${this.name}, I am a ${this.position}, and I earn ${this.salary} per year`);
+};
+
+Employee.prototype.giveRaise = function(raiseSalary:number) {
+    this.salary += raiseSalary;
+};
+
+const employee1 = new Employee(`A`, `Driver`, 1000);
+const employee2 = new Employee(`B`, `Officer`, 5000);
+
+employee1.introduce();
+employee2.introduce();
+employee2.giveRaise(6000);
+employee2.introduce();
+
+// Bai 7.4
+const Animal:any = function(this: any, name:string) {
+    this.name = name;
+};
+
+Animal.prototype.speak = function() {
+    console.log(`${this.name} makes a noise.`);
+};
+
+const animal1 = new Animal(`Fog`);
+animal1.speak();
+
+const Dog:any = function(this:any, name:string, breed:string) {
+    Animal.call(this, name);           //Phuong thuc func.call() de goi ham constructor Animal, ke thua thuoc tinh cua Animal
+    this.breed = breed;
+};
+
+Dog.prototype = Object.create(Animal.prototype);            //Kế thừa Animal.prototype 
+Dog.prototype.constructor = Dog;                //Đặt lại thuộc tính constructor của Dog trỏ về Dog.
+
+Dog.prototype.bark = function() {
+    console.log(`${this.name} barks`);
+};
+
+const dog1 = new Dog(`Alex`, `Golden Retriever`);
+
+dog1.bark();
+
+// Bai 7.5
+const Person2:any = function(this:any, name:string, age:number) {
+    this.name = name;
+    this.age = age;
+};
+
+Person2.prototype.introduce = function() {
+    console.log(`Hi, my name is ${this.name} and I am ${this.age} years old.`);
+};
+
+const Employee2:any = function(this:any, name:string, age:number, position:string, salary:number) {
+    Person2.call(this, name, age);
+    this.position = position;
+    this.salary = salary;
+};
+
+Employee2.prototype = Object.create(Person2.prototype);
+Employee2.prototype.constructor = Employee2;
+
+Employee2.prototype.introduce = function() {
+    console.log(`Hi, my name is ${this.name}, I am ${this.age} years old, I work as a ${this.position}, and I earn ${this.salary} per year.`);
+};
+
+const person3 = new Person2(`C`, 23);
+person3.introduce();
+
+const employee3 = new Employee2(`D`, 34, `Dentist`, 4000);
+const employee4 = new Employee2(`E`, 15, `Student`, 0);
+
+employee3.introduce();
+employee4.introduce();
+
+// Bai 7.6
+const Shape:any = function(this:any, name:string) {
+    this.name = name;
+};
+
+Shape.prototype.getArea = function() {
+    return 0;
+};
+
+const Circle:any = function(this:any, name:string, radius:number) {
+    Shape.call(this, name);
+    this.radius = radius;
+};
+
+Circle.prototype = Object.create(Shape.prototype);
+Circle.prototype.constructor = Circle;
+
+Circle.prototype.getArea = function() {
+    return Math.PI * this.radius * this.radius;
+};
+
+const Rectangle:any = function(this:any, name:string, width:number, height:number) {
+    Shape.call(this, name);
+    this.width = width;
+    this.height = height;
+};
+
+Rectangle.prototype = Object.create(Shape.prototype);
+Rectangle.prototype.constructor = Rectangle;
+
+Rectangle.prototype.getArea = function() {
+    return this.width * this.height;
+};
+
+const circle1 = new Circle(`Tron`, 12)
+const rectangle1 = new Rectangle(`Tam giac`, 12, 4);
+
+console.log(circle1.getArea());
+console.log(rectangle1.getArea());
+
+// Bai 7.7
+const Account:any = function(this:any, owner:string, balance:number) {
+    this.owner = owner;
+    this.balance = balance;
+};
+
+Account.prototype.deposit = function(amount:number) {
+    this.balance += amount;
+    console.log(`Da gui ${amount} vao tai khoan cua ${this.owner}. So du hien tai la ${this.balance}`);
+
+};
+
+Account.prototype.withdraw = function(amount:number) {
+    if (amount > this.balance) {
+        console.log(`So du tai khoan khong du de rut tien`);
+    } else {
+        this.balance -= amount;
+        console.log(`Da rut ${amount} khoi tai khoan cua ${this.owner}. So du hien tai la ${this.balance}`);
     }
 };
 
-item.price = 1000;
+const SavingsAccount:any = function(this:any, owner:string, balance:number, interestRate:number) {
+    Account.call(this, owner, balance);
+    this.interestRate = interestRate;
+};
 
+SavingsAccount.prototype = Object.create(Account.prototype);
+SavingsAccount.prototype.constructor = SavingsAccount;
+
+SavingsAccount.prototype.addInterest = function() {
+    const interest = this.balance * this.interestRate / 100;
+    this.balance += interest;
+    console.log(`Da them ${interest} tien lai vao tai khoan cua ${this.owner}. So du hien tai la ${this.balance}`);
+};
+
+const CheckingAccount:any = function(this:any, owner:string, balance:number, overdraftLimit:number) {
+    Account.call(this, owner, balance);
+    this.overdraftLimit = overdraftLimit;
+};
+
+CheckingAccount.prototype = Object.create(Account.prototype);
+CheckingAccount.prototype.constructor = CheckingAccount;
+
+CheckingAccount.prototype.withdraw = function(amount:number) {
+    if (amount > this.overdraftLimit + this.balance) {
+        console.log(`So tien vuot qua gioi han duoc phep rut`);
+    } else {
+        this.balance -= amount;
+        console.log(`Da rut ${amount} khoi tai khoan cua ${this.owner}. So du hien tai la ${this.balance}`);
+    }
+};
+
+const savingsAccount = new SavingsAccount(`ABC`, 1500, 110);
+savingsAccount.deposit(1000);
+savingsAccount.withdraw(400);
+savingsAccount.addInterest();
+
+const checkingAccount = new CheckingAccount(`DEF`, 2400, 1000);
+checkingAccount.withdraw(3200);
