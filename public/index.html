@@ -3,11 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Node.js App</title>
+  <title>Sample HTML Document</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Hello Word!!</h1>
+  <!-- Header Section -->
+  <header>
+    <h1>Welcome to the Sample HTML Document</h1>
+    <nav class="main-nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/dom.html">DOM</a></li>
+          <li><a href="/data.html">Data</a></li>
+        </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content Section -->
+  <main>
+    <section>
+      <h2>About This Document</h2>
+      <p>This document contains common HTML tags and their usage.</p>
+      <p><strong>Note:</strong> This is a sample document for learning purposes.</p>
+    </section>
+
+    <section>
+      <h3>Text Formatting</h3>
+      <p><em>Italic</em> and <strong>bold</strong> text.</p>
+      <p>Underlined text: <u>this is underlined</u>.</p>
+      <p>Highlighted text: <mark>this text is highlighted</mark>.</p>
+      <hr>
+    </section>
+
+    <section>
+      <h3>Lists</h3>
+      <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </ul>
+      <ol>
+        <li>First</li>
+        <li>Second</li>
+        <li>Third</li>
+      </ol>
+      <dl>
+        <dt>HTML</dt>
+        <dd>A markup language for creating web pages</dd>
+        <dt>CSS</dt>
+        <dd>A style sheet language used for describing the presentation of a document</dd>
+      </dl>
+    </section>
+
+    <section>
+      <h3>Images and Media</h3>
+      <p>Here is an image:</p>
+      <img src="https://via.placeholder.com/150" alt="Placeholder Image">
+
+      <p>Here is a video:</p>
+      <video controls width="250">
+        <source src="medias/video-mp4.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <p>Here is an audio:</p>
+      <audio controls>
+        <source src="medias/audio-mp3.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+      </audio>
+    </section>
+
+    <section>
+      <h3>Table Example</h3>
+      <table>
+        <caption>Sample Table</caption>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+        </tr>
+        <tr>
+          <td>John</td>
+          <td>28</td>
+        </tr>
+        <tr>
+          <td>Jane</td>
+          <td>22</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h3>Form Example</h3>
+      <form action="#">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br><br>
+
+        <label for="gender">Gender:</label><br>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br><br>
+
+        <label for="car">Choose a car:</label><br>
+        <select id="car" name="car">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+        </select><br><br>
+
+        <input type="submit" value="Submit">
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>Footer Information</p>
+    <p>&copy; 2024 Sample Company</p>
+  </footer>
+
   <script src="app.js"></script>
 </body>
 </html>

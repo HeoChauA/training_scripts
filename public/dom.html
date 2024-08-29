@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài tập về DOM</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1>Welcome to the Sample HTML Document</h1>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/dom.html">DOM</a></li>
+            <li><a href="/data.html">Data</a></li>
+        </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content Section -->
+  <main>
+    <section class="example-1">
+      <h2>Example 1: Change text</h2>
+      <p class="change-text">This is first paragraph.</p>
+      <button class="change-text-btn">Change text</button>
+      <hr>
+      <div><strong>Request:</strong><br>
+        - When click on button "Change text", the text in p.change-text will be change to new paragraph: "The paragraph changed to new paragraph."
+      </div>
+    </section>
+
+    <section class="example-2">
+      <h2>Example 2: Add to list</h2>
+      <ul class="my-list">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </ul>
+      <button class="add-to-list">Add item</button>
+      <button class="remove-to-list">Remove item</button>
+      <hr>
+      <div><strong>Request:</strong><br>
+        - When click on button "Add item" will be add new item "New Item" to bottom of list<br>
+        - When click on button "Remove item" will be remove last item of list
+      </div>
+    </section>
+
+    <section class="example-3">
+      <h2>Example 3: Change background color</h2>
+      <div class="bg-color" style="background-color: #f0f0f0; padding: 20px;">This is a div with background color</div>
+      <button class="change-color">Change color</button>
+      <hr>
+      <div><strong>Request:</strong><br>
+        - Create function changeColor() on module.ts file to change background color of div.bg-color<br>
+        - Import function changeColor() to index.ts file and call it when click on button "Change color"<br>
+        - When click on button "Change color", the background color of div.bg-color will be change to new color.
+      </div>
+    </section>
+
+    <section class="example-4">
+      <h2>Example 4: Change attribule of element</h2>
+      <img class="my-image" src="https://picsum.photos/id/237/536/354" alt="Placeholder Image">
+      <br>
+      <button class="change-img">Change Image</button>
+      <hr>
+      <div><strong>Request:</strong><br>
+        - When click on button "Change Image", the src attribute of img.my-image will be change to new image: "https://picsum.photos/id/${randomNumber}/536/354" with ${randomNumber} is random number from 100 to 200.
+      </div>
+    </section>
+
+    <section class="example-5">
+      <h2>Example 5: Count characters</h2>
+      <input type="text" class="input-text-field" placeholder="Type the content...">
+      <p class="char-count">Characters: <span>0</span></p>
+      <hr>
+      <div><strong>Request:</strong><br>
+      - When typing on input.input-text-field, the number of characters in input will be displayed in p.char-count
+      </div>
+    </section>
+
+    <section class="example-6">
+      <h2>Example 6: hange font size</h2>
+      <p class="text-to-resize">This is a text to resize</p>
+      <input type="range" min="10" max="40" value="16" class="font-size-slider">
+      <br>
+      Size: <span class="font-size-value">16</span>
+      <hr>
+      <div><strong>Request:</strong><br>
+      - When slider the value of input.font-size-slider, the font size of p.text-to-resize will be change to new size.
+      </div>
+    </section>
+
+    <section class="example-7">
+      <h2>Example 7: Count the click to button</h2>
+      <button class="btn-click-count">Click here</button>
+      <br>
+      Click count: <span class="btn-click-count-val">0</span>
+      <hr>
+      <div><strong>Request:</strong><br>
+      - When click on button "Click here", the number of clicks will be displayed in span.btn-click-count-val
+      </div>
+    </section>
+
+    <section class="example-8">
+      <h2>Example 7: Sum and Subtract</h2>
+      <h4>Sum</h4>
+      <div class="inline calculator-sum">
+        <input type="number" class="input-number-1" placeholder="Number 1">
+        <span>+</span>
+        <input type="number" class="input-number-2" placeholder="Number 2">
+        <button class="btn-equal">=</button>
+        <input class="input-result" type="number" readonly placeholder="Result">
+      </div>
+      <h4>Subtract</h4>
+      <div class="inline calculator-subtract">
+        <input type="number" class="input-number-1" placeholder="Number 1">
+        <span>-</span>
+        <input type="number" class="input-number-2" placeholder="Number 2">
+        <button class="btn-equal">=</button>
+        <input class="input-result" type="number" readonly placeholder="Result">
+      </div>
+      <hr>
+      <div><strong>Request:</strong><br>
+      - Create file "math.ts" with 2 functions sum() and subtract() to calculate sum and subtract of two numbers<br>
+      - In "index.ts" file, import 2 functions sum() and subtract() from math.ts file and call them when click on button "="<br>
+      - When click on button "=" on Sum, the sum of two numbers in input.input-number-1 and input.input-number-2 will be displayed in input.input-result<br>
+      - When click on button "=" on Subtract, the subtract of two numbers in input.input-number-1 and input.input-number-2 will be displayed in input.input-result
+      </div>
+    </section>
+
+    <section class="example-9">
+      <h2>Example 7: User data</h2>
+      <input type="text" class="find-user" placeholder="Find the user by name"><br>
+
+      <div class="user-card add-user-wrap">
+        <h3>User card</h3>
+        <p>Name: <input class="user-name" type="text"></p>
+        <p>Age: <input class="user-age" type="number"></p>
+        <p>Location: <input class="user-location" type="text"></p>
+        <p>Email: <input class="user-email" type="email"></p>
+        <p><button class="add-user">Add user</button></p>
+      </div>
+      <hr>
+      <div><strong>Request:</strong><br>
+      - Read "user.ts" with the give data<br>
+      - Export "users" and display all user data folowing "User card" template<br><br>
+      <div class="user-list">
+        <div class="user-card">
+          <span class="remove-user">X</span>
+          <h3>User card</h3>
+          <p>Name: <span class="user-name">Alice</span></p>
+          <p>Age: <span class="user-age">25</span></p>
+          <p>Location: <span class="user-location">New York</span></p>
+          <p>Email: <span class="user-email">alice@example.com</span></p>
+        </div>
+
+        <div class="user-card">
+          <span class="remove-user">X</span>
+          <h3>User card</h3>
+          <p>Name: <span class="user-name">Bob</span></p>
+          <p>Age: <span class="user-age">30</span></p>
+          <p>Location: <span class="user-location">San Francisco</span></p>
+          <p>Email: <span class="user-email">bob@example.com</span></p>
+        </div>
+
+        <div class="user-card">
+          <span class="remove-user">X</span>
+          <h3>User card</h3>
+          <p>Name: <span class="user-name">Charlie</span></p>
+          <p>Age: <span class="user-age">22</span></p>
+          <p>Location: <span class="user-location">Chicago</span></p>
+          <p>Email: <span class="user-email">charlie@example.com</span></p>
+        </div>
+      </div>
+      <br>
+      - Create and export function "findUserByName(name)" to find user by name when type to input.find-user<br>
+      - Create and export function "addUser(newUser)" to add new user when click on button "Add user"<br>
+      - Create and export function "removeUser(user)" to remove user when click on button "X"
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>Footer Information</p>
+    <p>&copy; 2024 Sample Company</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

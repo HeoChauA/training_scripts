@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài tập về Database</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1>Welcome to the Sample HTML Document</h1>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/dom.html">DOM</a></li>
+            <li><a href="/data.html">Data</a></li>
+        </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content Section -->
+  <main>
+    <section>
+      <h2>Use the API from jsonplaceholder</h2>
+      <div>
+        <strong>Document:</strong> <a href="https://jsonplaceholder.typicode.com/" target="_blank">https://jsonplaceholder.typicode.com/</a>
+      </div>
+    </section>
+
+    <section class="example-1">
+      <h2>Example 1: Get list posts</h2>
+      <ul id="post-list"></ul>
+      <hr>
+      <div><strong>Request:</strong><br>
+        - Create files in 'src/api/jsonplaceholder.ts' for create module "fetchPosts" use async/await and fetch function to get API from: <a href="https://jsonplaceholder.typicode.com/posts" target="_blank">https://jsonplaceholder.typicode.com/posts</a><br>
+        - Import "fetchPosts" into 'src/index.ts' and call it to get list posts and display to ul#post-list<br>
+        - When click to the post title, the post body will be displayed below the title<br>
+        - Create and export module "fetchComments(postId)" in 'src/api/jsonplaceholder.ts' file to get comments of a post by postId: <a href="https://jsonplaceholder.typicode.com/comments?postId=1" target="_blank">https://jsonplaceholder.typicode.com/comments?postId=${postId}</a><br>
+        - Import "fetchComments" into 'src/index.ts' and call it when click to the post title to get comments of the post and display to the post item<br>
+      </div>
+    </section>
+
+    <section class="example-1">
+      <h2>Example 2: Get photo by album</h2>
+      <div id="albums-container"></div>
+      <hr>
+      <div><strong>Request:</strong><br>
+        - In 'src/api/jsonplaceholder.ts' file, create and export module "fetchAlbums" and "fetchPhotos" use async/await and fetch function to get API from: <a href="https://jsonplaceholder.typicode.com/albums" target="_blank">https://jsonplaceholder.typicode.com/albums</a><br>
+        - Import "fetchAlbums" and "fetchPhotos" into 'src/index.ts' and call them to get list albums and first photo by albumId and display to div#albums-container<br>
+        - When click to the first photo, use <a href="https://cdnjs.com/libraries/lightbox2" target="_blank">"lightbox2"</a> librarie to display all the photos of the album in popup<br>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>Footer Information</p>
+    <p>&copy; 2024 Sample Company</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox-plus-jquery.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
