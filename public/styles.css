@@ -75,3 +75,23 @@ button {
 .user-card > h3 {
   text-align: center;
 }
+
+#post-list h3 {
+  cursor: pointer;
+}
+
+.post-content {
+  display: none;
+  margin-left: 20px;
+}
+.post-content.active {
+  display: block;
+}
+
+.album {
+  margin-bottom: 20px;
+  padding: 0;
+}
+.album img.thumbnail {
+  cursor: pointer;
+}
