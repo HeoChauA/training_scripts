@@ -28,6 +28,8 @@ export async function fetchComments(postId: any) {
     }
 }
 
+// Ex 2
+
 export async function fetchAlbums() {
     try {
         const response = await fetch(`https://jsonplaceholder.typicode.com/albums`);
