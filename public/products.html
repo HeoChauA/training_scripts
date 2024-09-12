@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài tập về Database</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1>Welcome to the Sample HTML Document</h1>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/dom.html">DOM</a></li>
+            <li><a href="/data.html">Data</a></li>
+            <li><a href="/products.html">Products</a></li>
+        </ul>
+    </nav>
+  </header>
+
+  <section class="container">
+    <h2>Use the API from dummyjson</h2>
+    <div>
+      <strong>Document:</strong> <a href="https://dummyjson.com/docs/" target="_blank">https://dummyjson.com/docs/</a>
+    </div>
+    <hr>
+    <div><strong>Request:</strong><br>
+      - Create files in 'src/api/dummyjson.ts' for create module "fetchProducts" use async/await and fetch function to get API from: <a href="https://dummyjson.com/docs/products" target="_blank">https://dummyjson.com/docs/products</a><br>
+      - Import "fetchProducts" into 'src/index.ts' and call it to get list Products and display to ul#products-list<br>
+      - Make style for products list: display as grid with 3 columns like this <a href="https://demo.templatesjungle.com/ministore/shop.html" target="_blank">https://demo.templatesjungle.com/ministore/shop.html</a><br>
+      - Update module "fetchProducts" for display 12 products (use <a href="https://dummyjson.com/docs/products#products-limit_skip" target="_blank">https://dummyjson.com/docs/products#products-limit_skip</a>). And when click button "Load more" will be display 12 products more<br>
+      - Create module "searchProducts" use async/await and fetch function to get API from: <a href="https://dummyjson.com/docs/products#products-search" target="_blank">https://dummyjson.com/docs/products#products-search</a> to search products by name. When type in input search and click button "Search", the products list will be filter by name<br>
+      - Create module "fetchProductsCategories" use async/await and fetch function to get API from: <a href="https://dummyjson.com/docs/products#products-categories" target="_blank">https://dummyjson.com/docs/products#products-categories</a> to get list categories of products. Display list categories to ul#categories-list.<br>
+      - Create module "fetchProductsByCategory" use async/await and fetch function to get API from: <a href="https://dummyjson.com/docs/products#products-category" target="_blank">https://dummyjson.com/docs/products#products-category</a> to get list products by category when click on category item above<br>
+    </div>
+  </section>
+
+  <div class="page-wrap">
+    <!-- Main Content Section -->
+    <main>
+      <section class="example-1">
+        <h2>Example 1: Get list products</h2>
+        <ul id="products-list" class="products-list"></ul>
+        <button class="products-loadmore">Load more</button>
+      </section>
+    </main>
+
+    <!-- Sidebar -->
+    <aside>
+      <section class="block-search">
+        <form id="search-form">
+          <input type="text" id="search-input" placeholder="Search products...">
+          <button type="submit">Search</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Categories</h2>
+        <ul id="categories-list" class="categories-list">
+          <li class="category active"><span data-slug="">All</span></li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>Footer Information</p>
+    <p>&copy; 2024 Sample Company</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox-plus-jquery.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -17,9 +17,44 @@ nav {
     column-gap: 20px;
   }
 }
-main {
+main,
+.container {
   max-width: 1366px;
   margin: 0 auto;
+}
+.page-wrap {
+  display: flex;
+  justify-self: center;
+  align-items: flex-start;
+  column-gap: 20px;
+  max-width: 1366px;
+  margin: 0 auto;
+
+  main {
+    max-width: none;
+    margin: 0;
+    flex: 2;
+  }
+
+  aside {
+    flex: 1;
+  }
+}
+aside {
+  h2 {
+    margin: 0 0 12px;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+      list-style: none;
+      margin-bottom: 5px;
+    }
+  }
 }
 section {
   margin: 20px 0;
