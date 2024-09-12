@@ -104,7 +104,7 @@ eval("\n\n/* eslint-disable */\n\n/**\n * @param {string[]} pathComponents\n * @
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n    if(true) {\n      (function() {\n        var localsJsonString = undefined;\n        // 1724605168217\n        var cssReload = __webpack_require__(/*! ../node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ \"./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js\")(module.id, {});\n        // only invalidate when locals change\n        if (\n          module.hot.data &&\n          module.hot.data.value &&\n          module.hot.data.value !== localsJsonString\n        ) {\n          module.hot.invalidate();\n        } else {\n          module.hot.accept();\n        }\n        module.hot.dispose(function(data) {\n          data.value = localsJsonString;\n          cssReload();\n        });\n      })();\n    }\n  \n\n//# sourceURL=webpack://training_javascript/./src/styles.scss?");
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n    if(true) {\n      (function() {\n        var localsJsonString = undefined;\n        // 1726120520120\n        var cssReload = __webpack_require__(/*! ../node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ \"./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js\")(module.id, {});\n        // only invalidate when locals change\n        if (\n          module.hot.data &&\n          module.hot.data.value &&\n          module.hot.data.value !== localsJsonString\n        ) {\n          module.hot.invalidate();\n        } else {\n          module.hot.accept();\n        }\n        module.hot.dispose(function(data) {\n          data.value = localsJsonString;\n          cssReload();\n        });\n      })();\n    }\n  \n\n//# sourceURL=webpack://training_javascript/./src/styles.scss?");
 
 /***/ }),
 
@@ -115,7 +115,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.scss */ \"./src/styles.scss\");\n/* harmony import */ var _module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./module */ \"./src/module.ts\");\n\n\ndocument.querySelector('.change-color')?.addEventListener('click', () => {\n    document.querySelector('.bg-color').style.backgroundColor = (0,_module__WEBPACK_IMPORTED_MODULE_1__.getRandomColor)();\n});\ndocument.querySelector('.change-img')?.addEventListener('click', () => {\n    const randomNumber = Math.floor(Math.random() * (200 - 100 + 1)) + 100;\n    const myImage = document.querySelector('.my-image');\n    myImage.src = `https://picsum.photos/id/${randomNumber}/536/354`;\n});\ndocument.querySelector('.input-text-field')?.addEventListener('keyup', (event) => {\n    document.querySelector('.char-count > span').textContent = event.target.value.length.toString();\n});\ndocument.querySelector('.font-size-slider')?.addEventListener('input', (event) => {\n    const fontSize = event.target.value;\n    document.querySelector('.font-size-value').textContent = fontSize;\n    document.querySelector('.text-to-resize').style.fontSize = `${fontSize}px`;\n});\nlet countClick = 0;\ndocument.querySelector('.btn-click-count')?.addEventListener('click', () => {\n    countClick++;\n    document.querySelector('.btn-click-count-val').textContent = countClick.toString();\n});\n\n\n//# sourceURL=webpack://training_javascript/./src/index.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.scss */ \"./src/styles.scss\");\n/* harmony import */ var _module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./module */ \"./src/module.ts\");\n\n\n// TODO: Dom exercise\ndocument.querySelector('.change-color')?.addEventListener('click', () => {\n    document.querySelector('.bg-color').style.backgroundColor = (0,_module__WEBPACK_IMPORTED_MODULE_1__.getRandomColor)();\n});\ndocument.querySelector('.change-img')?.addEventListener('click', () => {\n    const randomNumber = Math.floor(Math.random() * (200 - 100 + 1)) + 100;\n    const myImage = document.querySelector('.my-image');\n    myImage.src = `https://picsum.photos/id/${randomNumber}/536/354`;\n});\ndocument.querySelector('.input-text-field')?.addEventListener('keyup', (event) => {\n    document.querySelector('.char-count > span').textContent = event.target.value.length.toString();\n});\ndocument.querySelector('.font-size-slider')?.addEventListener('input', (event) => {\n    const fontSize = event.target.value;\n    document.querySelector('.font-size-value').textContent = fontSize;\n    document.querySelector('.text-to-resize').style.fontSize = `${fontSize}px`;\n});\nlet countClick = 0;\ndocument.querySelector('.btn-click-count')?.addEventListener('click', () => {\n    countClick++;\n    document.querySelector('.btn-click-count-val').textContent = countClick.toString();\n});\nasync function displayPosts() {\n    let { fetchPosts, fetchComments } = await __webpack_require__.e(/*! import() */ \"src_api_jsonplaceholder_ts\").then(__webpack_require__.bind(__webpack_require__, /*! ./api/jsonplaceholder */ \"./src/api/jsonplaceholder.ts\"));\n    const posts = await fetchPosts();\n    const postList = document.getElementById('post-list');\n    // Loop through each post\n    posts?.forEach((post) => {\n        // Display li wrap the title of post\n        const listItem = document.createElement('li');\n        const title = document.createElement('h3');\n        title.textContent = post.title;\n        listItem.appendChild(title);\n        // Create elememnt to display the body and comments of post\n        const postContent = document.createElement('div');\n        postContent.classList.add('post-content');\n        // Add body to postContent\n        const bodyText = document.createElement('p');\n        bodyText.textContent = post.body;\n        postContent.appendChild(bodyText);\n        // Add comments to postContent\n        const commentList = document.createElement('ul');\n        postContent.appendChild(commentList);\n        // Display the body and comment when click to title\n        title.addEventListener('click', async () => {\n            postContent.classList.toggle('active'); // Display the body\n            if (postContent.classList.contains('active')) {\n                // Get comments of post\n                if (commentList.children.length === 0) {\n                    const comments = await fetchComments(post.id);\n                    comments.forEach((comment) => {\n                        const commentItem = document.createElement('li');\n                        commentItem.innerHTML = `${comment.name} - ${comment.email}<br> ${comment.body}`;\n                        commentList.appendChild(commentItem);\n                    });\n                }\n            }\n        });\n        // Display posts to page\n        listItem.appendChild(postContent);\n        postList?.appendChild(listItem);\n    });\n}\nasync function fetchPhotosAndAlbums() {\n    let { fetchAlbums, fetchPhotos } = await __webpack_require__.e(/*! import() */ \"src_api_jsonplaceholder_ts\").then(__webpack_require__.bind(__webpack_require__, /*! ./api/jsonplaceholder */ \"./src/api/jsonplaceholder.ts\"));\n    try {\n        // Fetch albums and photos\n        const [albums, photos] = await Promise.all([fetchAlbums(), fetchPhotos()]);\n        // Wrap the photos by albums\n        const albumsWithPhotos = albums.map(album => {\n            return {\n                ...album,\n                photos: photos.filter(photo => photo.albumId === album.id)\n            };\n        });\n        // Display album list with photos\n        displayAlbumsWithPhotos(albumsWithPhotos);\n    }\n    catch (error) {\n        console.error('Error fetching data:', error);\n    }\n}\nfunction displayAlbumsWithPhotos(albumsWithPhotos) {\n    const albumsContainer = document.getElementById('albums-container');\n    albumsWithPhotos.forEach(album => {\n        const albumDiv = document.createElement('div');\n        albumDiv.classList.add('album');\n        const albumTitle = document.createElement('h3');\n        albumTitle.textContent = `Album: ${album.title}`;\n        albumDiv.appendChild(albumTitle);\n        // Display first photo of album\n        if (album.photos.length > 0) {\n            const firstPhoto = album.photos[0];\n            const firstPhotoLink = document.createElement('a');\n            firstPhotoLink.href = firstPhoto.url;\n            firstPhotoLink.dataset.lightbox = `album-${album.id}`;\n            firstPhotoLink.dataset.title = album.title;\n            const firstPhotoImage = document.createElement('img');\n            firstPhotoImage.src = firstPhoto.thumbnailUrl;\n            firstPhotoImage.alt = album.title;\n            firstPhotoLink.appendChild(firstPhotoImage);\n            albumDiv.appendChild(firstPhotoLink);\n            // Display all the photos in Lightbox2\n            album.photos.forEach(photo => {\n                const photoLink = document.createElement('a');\n                photoLink.href = photo.url;\n                photoLink.dataset.lightbox = `album-${album.id}`;\n                photoLink.dataset.title = photo.title;\n                albumDiv.appendChild(photoLink);\n            });\n        }\n        albumsContainer?.appendChild(albumDiv);\n    });\n}\n// Call the function to display photos and albums when DOM loaded\ndocument.addEventListener('DOMContentLoaded', displayPosts);\ndocument.addEventListener('DOMContentLoaded', fetchPhotosAndAlbums);\nlet currentSkip = 0;\nlet limit = 12;\nasync function loadAndDisplayProducts() {\n    let { fetchProducts } = await __webpack_require__.e(/*! import() */ \"src_api_dummyjson_ts\").then(__webpack_require__.bind(__webpack_require__, /*! ./api/dummyjson */ \"./src/api/dummyjson.ts\"));\n    const products = await fetchProducts(limit, currentSkip);\n    console.log(products, products.skip + products.limit);\n    if (products.limit === 0) {\n        console.log('No more products');\n        return;\n    }\n    else {\n        displayProducts(products.products);\n        limit = products.limit;\n        currentSkip += limit;\n    }\n}\nasync function displayProducts(products) {\n    const productsContainer = document.getElementById('products-list');\n    if (productsContainer) {\n        productsContainer.innerHTML = '';\n    }\n    products?.forEach((product) => {\n        const productDiv = document.createElement('div');\n        productDiv.classList.add('product');\n        const productThumbnail = document.createElement('img');\n        productThumbnail.src = product.thumbnail;\n        productThumbnail.alt = product.title;\n        const productTitle = document.createElement('h2');\n        productTitle.textContent = product.title;\n        const productPrice = document.createElement('p');\n        productPrice.textContent = `Price: $${product.price}`;\n        productDiv.appendChild(productThumbnail);\n        productDiv.appendChild(productTitle);\n        productDiv.appendChild(productPrice);\n        productsContainer?.appendChild(productDiv);\n    });\n}\n// Call the function to display when DOM loaded\ndocument.querySelector('.products-loadmore')?.addEventListener('click', loadAndDisplayProducts);\ndocument.addEventListener('DOMContentLoaded', loadAndDisplayProducts);\n// Seach products\ndocument.getElementById('search-form')?.addEventListener('submit', async function (event) {\n    event.preventDefault();\n    let { searchProducts } = await __webpack_require__.e(/*! import() */ \"src_api_dummyjson_ts\").then(__webpack_require__.bind(__webpack_require__, /*! ./api/dummyjson */ \"./src/api/dummyjson.ts\"));\n    const query = document.getElementById('search-input').value;\n    console.log('Search query:', query);\n    if (query) {\n        const products = await searchProducts(query);\n        if (products.limit === 0) {\n            console.log('No more products');\n            return;\n        }\n        else {\n            displayProducts(products.products);\n            document.querySelector('.products-loadmore').classList.add('hidden');\n        }\n    }\n    else {\n        return false;\n    }\n});\nasync function displayCategories() {\n    let { fetchProductsCategories } = await __webpack_require__.e(/*! import() */ \"src_api_dummyjson_ts\").then(__webpack_require__.bind(__webpack_require__, /*! ./api/dummyjson */ \"./src/api/dummyjson.ts\"));\n    const categories = await fetchProductsCategories();\n    const categoriesContainer = document.getElementById('categories-list');\n    categories?.forEach((category) => {\n        const categoryItem = document.createElement('li');\n        categoryItem.classList.add('category');\n        const categoryTitle = document.createElement('span');\n        categoryTitle.setAttribute('data-slug', category.slug.toString());\n        categoryTitle.textContent = category.name;\n        categoryItem.appendChild(categoryTitle);\n        categoriesContainer?.appendChild(categoryItem);\n    });\n    // Products by category\n    document.querySelectorAll('.category span').forEach(category => {\n        category.addEventListener('click', async function (event) {\n            event.preventDefault();\n            let { fetchProductsByCategory } = await __webpack_require__.e(/*! import() */ \"src_api_dummyjson_ts\").then(__webpack_require__.bind(__webpack_require__, /*! ./api/dummyjson */ \"./src/api/dummyjson.ts\"));\n            const categorySlug = event.target.dataset.slug;\n            const products = await fetchProductsByCategory(categorySlug);\n            console.log('Category:', categorySlug, products);\n            if (products.limit === 0) {\n                console.log('No more products');\n                return;\n            }\n            else {\n                displayProducts(products.products);\n                document.querySelector('.products-loadmore').classList.add('hidden');\n            }\n            // Remove active class from all categories\n            document.querySelectorAll('.category').forEach(cat => cat.classList.remove('active'));\n            // Add active class to the clicked category\n            event.target?.parentElement?.classList.add('active');\n        });\n    });\n}\n// Call the function to display when DOM loaded\ndocument.addEventListener('DOMContentLoaded', displayCategories);\n\n\n//# sourceURL=webpack://training_javascript/./src/index.ts?");
 
 /***/ }),
 
@@ -408,6 +408,28 @@ eval("/** @typedef {\"info\" | \"warning\" | \"error\"} LogLevel */\n\n/** @type
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/ensure chunk */
+/******/ 	(() => {
+/******/ 		__webpack_require__.f = {};
+/******/ 		// This file contains only the entry chunk.
+/******/ 		// The chunk loading function for additional chunks
+/******/ 		__webpack_require__.e = (chunkId) => {
+/******/ 			return Promise.all(Object.keys(__webpack_require__.f).reduce((promises, key) => {
+/******/ 				__webpack_require__.f[key](chunkId, promises);
+/******/ 				return promises;
+/******/ 			}, []));
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/get javascript chunk filename */
+/******/ 	(() => {
+/******/ 		// This function allow to reference async chunks
+/******/ 		__webpack_require__.u = (chunkId) => {
+/******/ 			// return url for filenames based on template
+/******/ 			return "" + chunkId + ".app.js";
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/get javascript update chunk filename */
 /******/ 	(() => {
 /******/ 		// This function allow to reference all chunks
@@ -433,7 +455,7 @@ eval("/** @typedef {\"info\" | \"warning\" | \"error\"} LogLevel */\n\n/** @type
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("a000fd256e7bbdfab255")
+/******/ 		__webpack_require__.h = () => ("96a78082a06b1b470d1f")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
@@ -1037,7 +1059,44 @@ eval("/** @typedef {\"info\" | \"warning\" | \"error\"} LogLevel */\n\n/** @type
 /******/ 			"main": 0
 /******/ 		};
 /******/ 		
-/******/ 		// no chunk on demand loading
+/******/ 		__webpack_require__.f.j = (chunkId, promises) => {
+/******/ 				// JSONP chunk loading for javascript
+/******/ 				var installedChunkData = __webpack_require__.o(installedChunks, chunkId) ? installedChunks[chunkId] : undefined;
+/******/ 				if(installedChunkData !== 0) { // 0 means "already installed".
+/******/ 		
+/******/ 					// a Promise means "currently loading".
+/******/ 					if(installedChunkData) {
+/******/ 						promises.push(installedChunkData[2]);
+/******/ 					} else {
+/******/ 						if(true) { // all chunks have JS
+/******/ 							// setup Promise in chunk cache
+/******/ 							var promise = new Promise((resolve, reject) => (installedChunkData = installedChunks[chunkId] = [resolve, reject]));
+/******/ 							promises.push(installedChunkData[2] = promise);
+/******/ 		
+/******/ 							// start chunk loading
+/******/ 							var url = __webpack_require__.p + __webpack_require__.u(chunkId);
+/******/ 							// create error before stack unwound to get useful stacktrace later
+/******/ 							var error = new Error();
+/******/ 							var loadingEnded = (event) => {
+/******/ 								if(__webpack_require__.o(installedChunks, chunkId)) {
+/******/ 									installedChunkData = installedChunks[chunkId];
+/******/ 									if(installedChunkData !== 0) installedChunks[chunkId] = undefined;
+/******/ 									if(installedChunkData) {
+/******/ 										var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 										var realSrc = event && event.target && event.target.src;
+/******/ 										error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 										error.name = 'ChunkLoadError';
+/******/ 										error.type = errorType;
+/******/ 										error.request = realSrc;
+/******/ 										installedChunkData[1](error);
+/******/ 									}
+/******/ 								}
+/******/ 							};
+/******/ 							__webpack_require__.l(url, loadingEnded, "chunk-" + chunkId, chunkId);
+/******/ 						}
+/******/ 					}
+/******/ 				}
+/******/ 		};
 /******/ 		
 /******/ 		// no prefetching
 /******/ 		
@@ -1538,7 +1597,34 @@ eval("/** @typedef {\"info\" | \"warning\" | \"error\"} LogLevel */\n\n/** @type
 /******/ 		
 /******/ 		// no on chunks loaded
 /******/ 		
-/******/ 		// no jsonp function
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 		
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunktraining_javascript"] = self["webpackChunktraining_javascript"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
 /******/ 	
 /************************************************************************/

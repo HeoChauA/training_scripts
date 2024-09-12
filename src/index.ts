@@ -28,10 +28,8 @@ document.querySelector('.btn-click-count')?.addEventListener('click', () => {
   document.querySelector('.btn-click-count-val')!.textContent = countClick.toString();
 });
 
-// TODO: Data exercise
+// TODO: Data exercise from https://jsonplaceholder.typicode.com/
 // Display posts from API
-import { fetchPosts, fetchComments } from './api/jsonplaceholder';
-
 interface Post {
   id: number;
   title: string;
@@ -46,6 +44,9 @@ interface Comment {
 }
 
 async function displayPosts() {
+
+  let { fetchPosts, fetchComments } = await import('./api/jsonplaceholder');
+
   const posts: Post[] = await fetchPosts();
   const postList = document.getElementById('post-list');
   
@@ -94,8 +95,6 @@ async function displayPosts() {
 }
 
 // Display Photos from API
-import { fetchAlbums, fetchPhotos } from './api/jsonplaceholder';
-
 interface Album {
   id: number;
   title: string;
@@ -111,6 +110,9 @@ interface Photo {
 }
 
 async function fetchPhotosAndAlbums() {
+  
+  let { fetchAlbums, fetchPhotos } = await import('./api/jsonplaceholder');
+
   try {
     // Fetch albums and photos
     const [albums, photos]: [Album[], Photo[]] = await Promise.all([fetchAlbums(), fetchPhotos()]);
@@ -173,3 +175,145 @@ function displayAlbumsWithPhotos(albumsWithPhotos: Album[]) {
 // Call the function to display photos and albums when DOM loaded
 document.addEventListener('DOMContentLoaded', displayPosts);
 document.addEventListener('DOMContentLoaded', fetchPhotosAndAlbums);
+
+// TODO: Data exercise from https://dummyjson.com/
+// Products list
+interface Product {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  thumbnail: string;
+}
+
+let currentSkip = 0;
+let limit = 12;
+
+async function loadAndDisplayProducts() {
+  let { fetchProducts } = await import('./api/dummyjson');
+
+  const products = await fetchProducts(limit, currentSkip);
+  console.log(products, products.skip + products.limit);
+
+  if (products.limit === 0) {
+    console.log('No more products');
+    return;
+  }
+  else {
+    displayProducts(products.products);
+    limit = products.limit;
+    currentSkip += limit;
+  }
+}
+
+async function displayProducts(products: Product[]) {
+  const productsContainer = document.getElementById('products-list');
+  if (productsContainer) {
+    productsContainer.innerHTML = '';
+  }
+
+  products?.forEach((product: Product) => {
+    const productDiv = document.createElement('div');
+    productDiv.classList.add('product');
+
+    const productThumbnail = document.createElement('img');
+    productThumbnail.src = product.thumbnail;
+    productThumbnail.alt = product.title;
+
+    const productTitle = document.createElement('h2');
+    productTitle.textContent = product.title;
+
+    const productPrice = document.createElement('p');
+    productPrice.textContent = `Price: $${product.price}`;
+
+    productDiv.appendChild(productThumbnail);
+    productDiv.appendChild(productTitle);
+    productDiv.appendChild(productPrice);
+
+    productsContainer?.appendChild(productDiv);
+  });
+}
+
+// Call the function to display when DOM loaded
+document.querySelector('.products-loadmore')?.addEventListener('click', loadAndDisplayProducts);
+document.addEventListener('DOMContentLoaded', loadAndDisplayProducts);
+
+// Seach products
+document.getElementById('search-form')?.addEventListener('submit', async function(event) {
+  event.preventDefault();
+  
+  let { searchProducts } = await import('./api/dummyjson');
+  const query = (document.getElementById('search-input') as HTMLInputElement).value;
+  
+  console.log('Search query:', query);
+  
+  if (query) {
+    const products = await searchProducts(query);
+    
+    if (products.limit === 0) {
+      console.log('No more products');
+      return;
+    }
+    else {
+      displayProducts(products.products);
+      document.querySelector('.products-loadmore')!.classList.add('hidden');
+    }
+  } else {
+    return false;
+  }
+});
+
+// Categories list
+interface Category {
+  slug: number;
+  name: string;
+  url: string;
+}
+
+async function displayCategories() {
+  let { fetchProductsCategories } = await import('./api/dummyjson');
+  const categories: Category[] = await fetchProductsCategories();
+
+  const categoriesContainer = document.getElementById('categories-list');
+  categories?.forEach((category: Category) => {
+    const categoryItem = document.createElement('li');
+    categoryItem.classList.add('category');
+
+    const categoryTitle = document.createElement('span');
+    categoryTitle.setAttribute('data-slug', category.slug.toString());
+    categoryTitle.textContent = category.name;
+
+    categoryItem.appendChild(categoryTitle);
+    categoriesContainer?.appendChild(categoryItem);
+  });
+
+  // Products by category
+  document.querySelectorAll('.category span').forEach(category => {
+    category.addEventListener('click', async function(event) {
+      event.preventDefault();
+      let { fetchProductsByCategory } = await import('./api/dummyjson');
+      const categorySlug = (event.target as HTMLElement).dataset.slug;
+      const products = await fetchProductsByCategory(categorySlug!);
+
+      console.log('Category:', categorySlug, products);
+
+      if (products.limit === 0) {
+        console.log('No more products');
+        return;
+      }
+      else {
+        displayProducts(products.products);
+        document.querySelector('.products-loadmore')!.classList.add('hidden');
+      }
+      
+      // Remove active class from all categories
+      document.querySelectorAll('.category').forEach(cat => cat.classList.remove('active'));
+
+      // Add active class to the clicked category
+      (event.target as HTMLElement)?.parentElement?.classList.add('active');
+    });
+  });
+}
+
+// Call the function to display when DOM loaded
+document.addEventListener('DOMContentLoaded', displayCategories);
