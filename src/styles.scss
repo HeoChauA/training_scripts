@@ -126,3 +126,67 @@ button {
     cursor: pointer;
   }
 }
+
+.products-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 20px; /* Space between the items */
+  list-style-type: none; /* Remove bullet points from ul */
+  padding: 0;
+}
+
+.product {
+  background-color: #fff; /* Set background color */
+  border: 1px solid #ddd; /* Add border to each product */
+  padding: 16px;
+  text-align: center; /* Center align the product content */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  transition: transform 0.3s ease;
+}
+
+.product:hover {
+  transform: translateY(-5px); /* Lift the product when hovered */
+}
+
+.product img {
+  max-width: 100%; /* Ensure the image fits within the container */
+  height: auto;
+  margin-bottom: 12px; /* Add space between the image and the title */
+}
+
+.product h3 {
+  font-size: 18px;
+  margin: 0 0 10px;
+  font-weight: bold;
+}
+
+.product p {
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+}
+
+.products-loadmore {
+  margin: 0 auto;
+  display: block;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.category {
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.active {
+    font-weight: bold;
+  }
+
+  span {
+    cursor: pointer;
+    display: block;
+  }
+}
