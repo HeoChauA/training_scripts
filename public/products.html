@@ -43,6 +43,13 @@
     <main>
       <section class="example-1">
         <h2>Example 1: Get list products</h2>
+        <select name="products-sort" id="products-sort">
+          <option value="">Default</option>
+          <option value="title-asc">Name (A- Z)</option>
+          <option value="title-desc">Name (Z - A)</option>
+          <option value="price-asc">Price (Low - High)</option>
+          <option value="price-desc">Price (High - Low)</option>
+        </select>
         <ul id="products-list" class="products-list"></ul>
         <button class="products-loadmore">Load more</button>
       </section>

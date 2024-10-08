@@ -187,13 +187,29 @@ interface Product {
 }
 
 let currentSkip = 0;
-let limit = 12;
+let currentCategory = '';
+let searchQuery = '';
+let sortBy = '';
 
-async function loadAndDisplayProducts() {
-  let { fetchProducts } = await import('./api/dummyjson');
+async function loadAndDisplayProducts(category: string = '', query: string = '', sortBy: string = '') {
+  let { fetchProducts, fetchProductsByCategory, searchProducts } = await import('./api/dummyjson');
+  document.querySelector('.products-loadmore')!.classList.add('hidden');
+  let limit = 12;
+  let sortKey = '';
+  let sortOrder = '';
 
-  const products = await fetchProducts(limit, currentSkip);
-  console.log(products, products.skip + products.limit);
+  if (sortBy) {
+    const [key, order] = sortBy.split('-');
+    sortKey = key;
+    sortOrder = order;
+  }
+
+  const products = category 
+    ? await fetchProductsByCategory(category, limit, currentSkip, sortKey, sortOrder) : query
+    ? await searchProducts(query, limit, currentSkip, sortKey, sortOrder)
+    : await fetchProducts(limit, currentSkip, sortKey, sortOrder);
+
+  console.log(products, products.skip, products.limit, category, query, sortBy);
 
   if (products.limit === 0) {
     console.log('No more products');
@@ -203,14 +219,22 @@ async function loadAndDisplayProducts() {
     displayProducts(products.products);
     limit = products.limit;
     currentSkip += limit;
+
+    console.log(products.skip + products.limit);
+
+    if (products.skip + products.limit >= products.total) {
+      document.querySelector('.products-loadmore')!.classList.add('hidden');
+    } else {
+      document.querySelector('.products-loadmore')!.classList.remove('hidden');
+    }
   }
 }
 
 async function displayProducts(products: Product[]) {
   const productsContainer = document.getElementById('products-list');
-  if (productsContainer) {
-    productsContainer.innerHTML = '';
-  }
+  // if (productsContainer) {
+  //   productsContainer.innerHTML = '';
+  // }
 
   products?.forEach((product: Product) => {
     const productDiv = document.createElement('div');
@@ -235,29 +259,43 @@ async function displayProducts(products: Product[]) {
 }
 
 // Call the function to display when DOM loaded
-document.querySelector('.products-loadmore')?.addEventListener('click', loadAndDisplayProducts);
-document.addEventListener('DOMContentLoaded', loadAndDisplayProducts);
+document.querySelector('.products-loadmore')?.addEventListener('click', () => {loadAndDisplayProducts(currentCategory, searchQuery, sortBy)});
+document.addEventListener('DOMContentLoaded', () => {loadAndDisplayProducts(currentCategory, searchQuery, sortBy)});
+
+const sortSelect = document.getElementById('products-sort') as HTMLSelectElement;
+if (sortSelect) {
+  sortSelect.addEventListener('change', async (event) => {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    if (selectedValue) {
+      currentSkip = 0;
+      document.getElementById('products-list')!.innerHTML = ''; // Clear previous products
+      sortBy = selectedValue;
+      await loadAndDisplayProducts(currentCategory, searchQuery, sortBy);
+    } else {
+      console.log('Default selected');
+    }
+  });
+}
 
 // Seach products
 document.getElementById('search-form')?.addEventListener('submit', async function(event) {
   event.preventDefault();
   
-  let { searchProducts } = await import('./api/dummyjson');
   const query = (document.getElementById('search-input') as HTMLInputElement).value;
   
   console.log('Search query:', query);
+
+  if (sortSelect) {
+    sortSelect.value = '';
+    sortBy = ''; // Reset sort for new search
+  }
   
   if (query) {
-    const products = await searchProducts(query);
-    
-    if (products.limit === 0) {
-      console.log('No more products');
-      return;
-    }
-    else {
-      displayProducts(products.products);
-      document.querySelector('.products-loadmore')!.classList.add('hidden');
-    }
+    searchQuery = query;
+    currentCategory = ''; // Reset category for new search
+    currentSkip = 0; // Reset skip for new category
+    document.getElementById('products-list')!.innerHTML = ''; // Clear previous products
+    await loadAndDisplayProducts(currentCategory, searchQuery);
   } else {
     return false;
   }
@@ -291,20 +329,29 @@ async function displayCategories() {
   document.querySelectorAll('.category span').forEach(category => {
     category.addEventListener('click', async function(event) {
       event.preventDefault();
-      let { fetchProductsByCategory } = await import('./api/dummyjson');
-      const categorySlug = (event.target as HTMLElement).dataset.slug;
-      const products = await fetchProductsByCategory(categorySlug!);
-
-      console.log('Category:', categorySlug, products);
-
-      if (products.limit === 0) {
-        console.log('No more products');
-        return;
+      if (sortSelect) {
+        sortSelect.value = '';
+        sortBy = ''; // Reset sort for new search
       }
-      else {
-        displayProducts(products.products);
-        document.querySelector('.products-loadmore')!.classList.add('hidden');
-      }
+      searchQuery = ''; // Reset search for new category
+      currentCategory = (event.target as HTMLElement).dataset.slug!;
+      currentSkip = 0; // Reset skip for new category
+      document.getElementById('products-list')!.innerHTML = ''; // Clear previous products
+      await loadAndDisplayProducts(currentCategory, searchQuery, sortBy);
+      // let { fetchProductsByCategory } = await import('./api/dummyjson');
+      // const categorySlug = (event.target as HTMLElement).dataset.slug;
+      // const products = await fetchProductsByCategory(categorySlug!);
+
+      // console.log('Category:', categorySlug, products);
+
+      // if (products.limit === 0) {
+      //   console.log('No more products');
+      //   return;
+      // }
+      // else {
+      //   displayProducts(products.products);
+      //   document.querySelector('.products-loadmore')!.classList.add('hidden');
+      // }
       
       // Remove active class from all categories
       document.querySelectorAll('.category').forEach(cat => cat.classList.remove('active'));

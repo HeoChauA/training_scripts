@@ -1,7 +1,7 @@
 // Products
-export async function fetchProducts($limit: number = 10, $skip: number = 0) {
+export async function fetchProducts($limit: number = 10, $skip: number = 0, $sortBy: string = '', $order: string = '') {
   try {
-    const response = await fetch(`https://dummyjson.com/products?limit=${$limit}&skip=${$skip}&select=title,price,thumbnail`);
+    const response = await fetch(`https://dummyjson.com/products?limit=${$limit}&skip=${$skip}&sortBy=${$sortBy}&order=${$order}&select=title,price,thumbnail`);
     const products = await response.json();
     return products;
   }
@@ -11,9 +11,9 @@ export async function fetchProducts($limit: number = 10, $skip: number = 0) {
   }
 }
 
-export async function searchProducts($query: string) {
+export async function searchProducts($query: string, $limit: number = 10, $skip: number = 0, $sortBy: string = '', $order: string = '') {
   try {
-    const response = await fetch(`https://dummyjson.com/products/search?q=${$query}`);
+    const response = await fetch(`https://dummyjson.com/products/search?q=${$query}&limit=${$limit}&skip=${$skip}&sortBy=${$sortBy}&order=${$order}&select=title,price,thumbnail`);
     const products = await response.json();
     return products;
   }
@@ -27,7 +27,7 @@ export async function fetchProductsCategories() {
   try {
     const response = await fetch('https://dummyjson.com/products/categories');
     const categories = await response.json();
-    console.log(categories);
+    // console.log(categories);
     return categories;
   }
   catch (error) {
@@ -36,11 +36,11 @@ export async function fetchProductsCategories() {
   }
 }
 
-export async function fetchProductsByCategory($category: string) {
+export async function fetchProductsByCategory($category: string, $limit: number = 10, $skip: number = 0, $sortBy: string = '', $order: string = '') {
   try {
-    let response = await fetch(`https://dummyjson.com/products/`);
+    let response = await fetch(`https://dummyjson.com/products`);
     if ($category) {
-      response = await fetch(`https://dummyjson.com/products/category/${$category}`);
+      response = await fetch(`https://dummyjson.com/products/category/${$category}?limit=${$limit}&skip=${$skip}&sortBy=${$sortBy}&order=${$order}&select=title,price,thumbnail`);
     }
     const products = await response.json();
     return products;
