@@ -1,7 +1,7 @@
-export async function fetchProducts(limit = 12, skip = 0) {
+export async function fetchProducts(limit = 12, skip = 0, sort = ``, order = ``) {
     try {
-        const response = await fetch(`https://dummyjson.com/products?limit=${limit}&skip=${skip}&select=title,price,thumbnail`);
-
+        const response = await fetch(`https://dummyjson.com/products?limit=${limit}&skip=${skip}&select=title,price,thumbnail&sortBy=${sort}&order=${order}`);
+        
         if (!response.ok) throw new Error(`Response status: ${response.status}`);
 
         return await response.json();
@@ -12,9 +12,9 @@ export async function fetchProducts(limit = 12, skip = 0) {
     }
 }
 
-export async function searchProducts(query:any) {
+export async function searchProducts(query:any, limit = 12, skip = 0, sort = ``, order = ``) {
     try {
-        const response = await fetch(`https://dummyjson.com/products/search?q=${query}`);
+        const response = await fetch(`https://dummyjson.com/products/search?q=${query}&limit=${limit}&skip=${skip}&select=title,price,thumbnail&sortBy=${sort}&order=${order}`);
 
         if (!response.ok) throw new Error(`Response status: ${response.status}`);
 
@@ -40,9 +40,14 @@ export async function fetchProductsCategories() {
     }
 }
 
-export async function fetchProductsByCategory(category:any) {
+export async function fetchProductsByCategory(category:any, limit = 12, skip = 0, sort = ``, order = ``) {
     try {
-        const response = await fetch(`https://dummyjson.com/products/category/${category}`);
+
+        let response = await fetch(`https://dummyjson.com/products?limit=${limit}&skip=${skip}&select=title,price,thumbnail&sortBy=${sort}&order=${order}`);
+
+        if (category) {
+            response = await fetch(`https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}&select=title,price,thumbnail&sortBy=${sort}&order=${order}`)
+        };
 
         if (!response.ok) throw new Error(`Response status: ${response.status}`);
 

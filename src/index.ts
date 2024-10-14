@@ -340,33 +340,52 @@ interface Product {
 
 let skip = 0;
 const limit = 12;
+let sort = ``;
+let order = ``;
+let currentCategory = '';
+let currentSearchQuery = '';
 
 async function loadAndDisplayProducts() {
-    const { fetchProducts } = await import(`./api/dummyjson`);
-    const products = await fetchProducts(limit, skip);
+    const { fetchProducts, searchProducts, fetchProductsByCategory } = await import(`./api/dummyjson`);
+    
+    let products;
+    
+    if (currentSearchQuery) {
+        // Nếu đang tìm kiếm sản phẩm
+        products = await searchProducts(currentSearchQuery, limit, skip, sort, order);
+    } else if (currentCategory) {
+        // Nếu đang xem theo danh mục
+        products = await fetchProductsByCategory(currentCategory, limit, skip, sort, order);
+    } else {
+        // Nếu đang hiển thị tất cả sản phẩm
+        products = await fetchProducts(limit, skip, sort, order);
+    }
 
-    // Kiểm tra xem còn sản phẩm để tải hay không
+    // Kiểm tra xem có sản phẩm để tải hay không
     if (products.products.length === 0) {
         const loadMoreButton = document.querySelector(`.products-loadmore`) as HTMLButtonElement;
         if (loadMoreButton) {
             loadMoreButton.textContent = 'No more products';
         }
+        return;
     }
 
-    // Hiển thị các sản phẩm đã tải
+    // Hiển thị sản phẩm
     displayProducts(products.products);
 
-    // Tăng skip để tải các sản phẩm tiếp theo khi nhấn "Load more"
+    // Tăng giá trị skip để tải các sản phẩm tiếp theo
     skip += limit;
 }
 
-async function displayProducts(products: Product[]) {
+function clearProductsContainer() {
     const productsContainer = document.querySelector(`ul#products-list`);
-
-    // Xóa sản phẩm cũ nếu có để hiển thị sản phẩm mới theo yêu cầu
     if (productsContainer) {
         productsContainer.innerHTML = '';
     }
+}
+
+async function displayProducts(products:any) {
+    const productsContainer = document.querySelector(`ul#products-list`);
 
     // Thêm sản phẩm mới mà không xóa sản phẩm cũ
     products.forEach((product: Product) => {
@@ -388,6 +407,8 @@ async function displayProducts(products: Product[]) {
         productDiv.appendChild(productPrice);
         productsContainer?.appendChild(productDiv);
     });
+
+    
 }
 
 // Gọi loadAndDisplayProducts khi trang lần đầu tải
@@ -398,7 +419,7 @@ const loadMoreButton = document.querySelector(`.products-loadmore`);
 
 if (loadMoreButton) {
     loadMoreButton.addEventListener('click', loadAndDisplayProducts);
-}
+};
 
 // Search sản phẩm
 const search = document.getElementById(`search-form`);
@@ -407,27 +428,12 @@ if (search) {
     search.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const { searchProducts } = await import(`./api/dummyjson`);
-
         const searchInput = document.getElementById(`search-input`) as HTMLInputElement;
-        const searchValue = searchInput.value;
+        currentSearchQuery = searchInput.value;
 
-        if (searchValue) {
-            const products = await searchProducts(searchValue);
-            
-            if (products.limit === 0) {
-                console.log('No more products');
-            } else {
-                // Hiển thị danh sách sản phẩm tìm kiếm được
-                displayProducts(products.products);
-
-                // Ẩn nút "Load more" khi hiển thị kết quả tìm kiếm
-                const loadMoreButton = document.querySelector('.products-loadmore');
-                if (loadMoreButton) {
-                    loadMoreButton.classList.add('hidden');
-                }
-            }
-        }
+        skip = 0; // Reset skip khi tìm kiếm mới
+        clearProductsContainer();
+        loadAndDisplayProducts();
     });
 }
 
@@ -456,35 +462,37 @@ async function displayProductsCategories() {
     })
 
     // Hiển thị danh sách sản phẩm theo danh mục
-    if (categoriesContainer) {
-        categoriesContainer.addEventListener('click', async (event) => {
+    const categoryElements = document.querySelectorAll(`.category span`);
+
+    categoryElements.forEach(category => {
+        category.addEventListener('click', async function(event) {
+            
             event.preventDefault();
 
-            const { fetchProductsByCategory } = await import(`./api/dummyjson`);
-
             const target = event.target as HTMLElement;
-            const slug = target.getAttribute(`data-slug`);
-                
-            if (slug) {
-                const products = await fetchProductsByCategory(slug);
+            currentCategory = target.dataset.slug || ``;
+            
+            skip = 0; // Reset skip khi thay đổi danh mục
+            clearProductsContainer();
+            loadAndDisplayProducts();
 
-                if (products.limit === 0) {
-                    console.log('No more products');
-                } else {
-                    // Hiển thị danh sách sản phẩm theo danh mục
-                    displayProducts(products.products);
-
-                    //Ẩn nút "Load more" khi hiển thị kết quả
-                    const loadMoreButton = document.querySelector('.products-loadmore');
-                    if (loadMoreButton) {
-                        loadMoreButton.classList.add('hidden');
-                    }
-                }
-
-                document.querySelectorAll('.category').forEach(cat => cat.classList.remove('active'));
-                target.parentElement?.classList.add('active');
-            }
-        })
-    }
+            document.querySelectorAll('.category').forEach(cat => cat.classList.remove('active'));
+            target.parentElement?.classList.add('active');
+            
+        });
+    });
 }
 displayProductsCategories();
+
+// Sắp xếp sản phẩm
+const sortBy = document.querySelector('#products-sort');
+if (sortBy) {
+    sortBy.addEventListener('change', (event) => {
+        const [newSort,newOrder] = (event.target as HTMLSelectElement).value.split('-');
+        sort = newSort;
+        order = newOrder;
+        skip = 0; // Reset lại skip khi thay đổi sắp xếp
+        clearProductsContainer();
+        loadAndDisplayProducts();
+    });
+}
